@@ -1,0 +1,12 @@
+.menu-text {
+    padding: 20px;
+}
+
+.header-toolbar {
+    justify-content: space-between;
+}
+
+.sidenav-container {
+    width: 100%;
+    height: 100%;
+}

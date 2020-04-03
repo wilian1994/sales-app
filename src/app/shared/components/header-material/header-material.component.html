@@ -1,0 +1,102 @@
+<!-- <mat-drawer-container class="example-container" [hasBackdrop]="hasBackdrop.value">
+    <mat-drawer #drawer mode="side">I'm a drawer</mat-drawer>
+
+    <mat-drawer-content>
+        <mat-form-field>
+            <mat-label>Has backdrop</mat-label>
+            <mat-select #hasBackdrop>
+                <mat-option>Unset</mat-option>
+                <mat-option [value]="true">True</mat-option>
+                <mat-option [value]="false">False</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
+        <app-categories-material></app-categories-material>
+    </mat-drawer-content>
+</mat-drawer-container> -->
+
+<!-- 02 -->
+<!-- <div class="header-toolbar">
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+        <h1 class="example-app-name">GCM SOLUCOES</h1>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #snav mode="side" fixedTopGap="56">
+            <mat-nav-list>
+                <a class="nav-link" [routerLink]="['/categories']">Categorias</a>
+            </mat-nav-list>
+        </mat-sidenav>
+    </mat-sidenav-container>
+</div>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>
+    <mat-icon>account_circle</mat-icon>
+    <span>Conta</span>
+  </button>
+    <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Configurações</span>
+  </button>
+</mat-menu> -->
+
+<!-- 03 -->
+<!-- Copyright 2019 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
+<mat-sidenav-container class="sidenav-container" (backdropClick)="sidenav.toggle()">
+    <mat-sidenav #sidenav class="sidenav" mode="over" fixedInViewport="true">
+        <mat-toolbar color="primary">Menu</mat-toolbar>
+        <mat-nav-list (click)="sidenav.toggle()">
+            <a mat-list-item [routerLink]="['/filmes']">Inicial</a>
+            <mat-divider></mat-divider>
+            <a mat-list-item [routerLink]="['/categories']">
+                <mat-icon aria-label="Side nav toggle icon"> category</mat-icon>
+                <div class="menu-text">Categorias</div>
+            </a>
+            <mat-divider></mat-divider>
+            <a mat-list-item [routerLink]="['/products']">
+                <mat-icon aria-label="Side nav toggle icon"> store</mat-icon>
+                <div class="menu-text">Lojas</div>
+            </a>
+            <mat-divider></mat-divider>
+            <a mat-list-item [routerLink]="['/products']">
+                <mat-icon aria-label="Side nav toggle icon"> headset</mat-icon>
+                <div class="menu-text">Produtos</div>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary" class="header-toolbar">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon aria-label="Side nav toggle icon"> menu</mat-icon>
+      </button>
+            <span>GCM SOLUÇÕES</span>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+        </mat-toolbar>
+        <div class="app-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>
+    <mat-icon>account_circle</mat-icon>
+    <span>Conta</span>
+  </button>
+    <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Configurações</span>
+  </button>
+</mat-menu>

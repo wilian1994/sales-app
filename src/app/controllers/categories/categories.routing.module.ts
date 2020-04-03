@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
 import { AddCategoriesComponent } from './add-categories/add-categories.component';
 import { CategoriesResolverGuard } from './guards/categories-resolver.guard';
+import { CategoriesMaterialComponent } from '../categories-material/categories-material.component';
 
 const routes: Routes = [
   {
     path: 'categories',
-    component: ListCategoriesComponent,
+    // component: ListCategoriesComponent,
+    component: CategoriesMaterialComponent
   },
   {
     path: 'categories',
