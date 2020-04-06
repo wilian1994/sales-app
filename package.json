@@ -20,6 +20,8 @@
         "@angular/platform-browser": "~8.2.9",
         "@angular/platform-browser-dynamic": "~8.2.9",
         "@angular/router": "~8.2.9",
+        "@ngx-translate/core": "^12.1.2",
+        "@ngx-translate/http-loader": "^4.0.0",
         "font-awesome": "^4.7.0",
         "ngx-bootstrap": "^5.5.0",
         "rxjs": "~6.4.0",
@@ -45,6 +47,7 @@
         "karma-coverage-istanbul-reporter": "~2.0.1",
         "karma-jasmine": "~2.0.1",
         "karma-jasmine-html-reporter": "^1.4.0",
+        "prettier": "2.0.2",
         "protractor": "~5.4.0",
         "ts-node": "~7.0.0",
         "typescript": "^3.5.3"

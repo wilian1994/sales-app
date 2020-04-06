@@ -10,7 +10,7 @@
         "no-console": false,
         "no-string-literal": false,
         "no-unused-expression": false,
-        "quotemark": [true, "single", "avoid-escape", "avoid-template"]
+        "quotemark-old": [true, "single", "avoid-escape", "avoid-template"]
     },
     "rulesDirectory": []
 }
