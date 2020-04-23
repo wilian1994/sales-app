@@ -12,9 +12,11 @@ export class InputFieldComponent {
   @Input() id: string;
   @Input() label: string;
   @Input() control;
+  @Input() controlName: string;
+  @Input() formGroup: FormGroup;
 
-  constructor() {
-   }
-
+   get formControl(): AbstractControl {
+    return this.formGroup.controls[this.controlName];
+  }
 
 }

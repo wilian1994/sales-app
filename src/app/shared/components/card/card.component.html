@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="float-left">
+        <h4>{{ title }}</h4>
+      </div>
+      <div class="float-right">
+        <button type="button" class="btn btn-primary" onclick="onNew()">
+          {{ subtitle }}
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <ng-content></ng-content>
+      <!-- <ng-template #loading>
+        <div *ngIf="error$ | async; else loadingNoError">
+          Erro ao carregar lojas, tente novamente mais tarde!
+        </div>
+        <ng-template #loadingNoError>
+          <span>Carregando Lojas...</span>
+        </ng-template>
+      </ng-template>
+      -->
+    </div>
+  </div>
+</div>

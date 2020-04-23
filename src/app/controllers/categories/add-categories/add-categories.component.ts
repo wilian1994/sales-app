@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { map, switchMap } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/services/alert-modal.service';
 import { Category } from 'src/app/shared/models/Category';
 import { CategoriesService } from './categories.service';
-import { ErrorMsgComponent } from 'src/app/shared/components/error-msg/error-msg.component';
 
 @Component({
   selector: 'app-add-categories',
@@ -19,18 +17,10 @@ export class AddCategoriesComponent implements OnInit {
   submitted: boolean = false;
 
   ngOnInit() {
-
-    // old
-    // this.route.params
-    // .pipe(
-    //   map((params: any) => params.id),
-    //   switchMap((id: string) => this.categoriesService.view(id))
-    // )
-    // .subscribe((category: any) => this.updaterForm(category))
-
     const category =  this.route.snapshot.data['category'];
     console.log(this.route.snapshot.data)
     this.createForm(category);
+    console.log(this.register.get('name').value,'name')
   }
 
   constructor(
@@ -39,6 +29,7 @@ export class AddCategoriesComponent implements OnInit {
     private alertModal: AlertModalService,
     private location: Location,
     private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   private createForm(category: Category){
@@ -76,6 +67,6 @@ export class AddCategoriesComponent implements OnInit {
   onCancel(){
     this.submitted = false;
     this.register.reset();
-    this.location.back();
+    this.router.navigateByUrl("/categories");
   }
 }

@@ -4,10 +4,15 @@ import { ListCategoriesComponent } from './controllers/categories/list-categorie
 import { AddCategoriesComponent } from './controllers/categories/add-categories/add-categories.component';
 
 const routes: Routes = [
+
+  {
+    path: 'stores',
+    loadChildren: () => import('./controllers/stores/stores.module').then(m => m.StoresModule),
+  },
   {
     path: 'categories',
     loadChildren: () => import('./controllers/categories/categories.module').then(m => m.CategoriesModule),
-  },
+  }
 ];
 
 @NgModule({

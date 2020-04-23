@@ -22,7 +22,6 @@ export class ListCategoriesComponent implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-    private modalService: BsModalService,
     private alertService: AlertModalService,
     private router: Router,
     private route: ActivatedRoute,

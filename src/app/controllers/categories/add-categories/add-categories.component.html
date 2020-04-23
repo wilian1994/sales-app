@@ -1,9 +1,21 @@
 <div class="form-style">
-    <h2>Cadastrar Categoria</h2>
-    <hr />
-    <form *ngIf="register" [formGroup]="register" (ngSubmit)="save()" class="needs-validation" novalidate>
-        <app-input-field [classCss]="submitted && hasError('name')" id="name" label="Nome" [control]="register.get('name')" formControlName="name" ngDefaultControl></app-input-field>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <button (click)="onCancel()" class="btn btn-default">Cancelar</button>
-    </form>
+  <h2>Cadastrar Categoria</h2>
+  <hr />
+  <form
+    *ngIf="register"
+    (ngSubmit)="save()"
+    class="needs-validation"
+    novalidate
+  >
+    <app-input-field
+      [classCss]="submitted && hasError('name')"
+      id="name"
+      label="Nome"
+      [control]="register.get('name')"
+      controlName="name"
+      [formGroup]="register"
+    ></app-input-field>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button (click)="onCancel()" class="btn btn-default">Cancelar</button>
+  </form>
 </div>

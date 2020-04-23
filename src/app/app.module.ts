@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app.routing.module';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { StoresModule } from './controllers/stores/stores.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
   ],
   imports: [
     CategoriesModule,
+    StoresModule,
     BrowserModule,
     AppRoutingModule,
     ModalModule.forRoot(),

@@ -1,109 +1,64 @@
-<!-- <div class="container">
-    <br />
-    <button class="float-right btn btn-primary mr-1" [routerLink]="['/categories/register']" routerLinkActive="router-link-active">Nova Categoria</button>
-    <br />
-    <br /> 
-    <table class="table table-striped table-sm" *ngIf="categories$.length; else loading ">
-        <thead>
-            <tr>
-                <th scope="col ">Nome</th>
-                <th scope="col ">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let category of categories$ ">
-                <td style="width:10%">{{category.name}}</td>
-                <td style="width:10%">
-                    <button type="button " class="btn btn-outline-primary" [routerLink]="['/categories/register/', category._id]"><span class="fa fa-pencil "></span></button>
-                    <button type="button " class="btn btn-outline-danger " (click)="delete(category) "><span class="fa fa-trash "></span></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ng-template #loading>
-        <span>Carregando categorys...</span>
-    </ng-template>
-
-</div> -->
 <div class="container">
-    <div class="card mt-3">
-        <div class="card-header">
-            <div class="float-left">
-                <h4>Cursos</h4>
-            </div>
-            <div class="float-right">
-                <button type="button" class="btn btn-primary" [routerLink]="['/categories/register']">
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="float-left">
+        <h4>Categorias</h4>
+      </div>
+      <div class="float-right">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/categories/register']"
+        >
           Nova Categoria
         </button>
-            </div>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover" *ngIf="categories$ | async as categories; else loading">
-                <thead>
-                    <tr>
-                        <th>Categorias</th>
-                        <th></th>
-                    </tr>
-                </thead>
+      </div>
+    </div>
+    <div class="card-body">
+      <table
+        class="table table-hover"
+        *ngIf="categories$ | async as categories; else loading"
+      >
+        <thead>
+          <tr>
+            <th>Categorias</th>
+            <th></th>
+          </tr>
+        </thead>
 
-                <tbody>
-                    <tr *ngFor="let category of categories">
-                        <td>{{ category.name }}</td>
-                        <td>
-                            <span class="float-right">
+        <tbody>
+          <tr *ngFor="let category of categories">
+            <td>{{ category.name }}</td>
+            <td>
+              <span class="float-right">
                 <button
                   type="button "
                   class="btn btn-outline-primary"
                   (click)="onEdit(category._id)"
                 >
-                  <span class="fa fa-pencil "></span>
-                            </button>
-                            <button type="button " class="btn btn-outline-danger " (click)="onDelete(category._id)">
-                  <span class="fa fa-trash "></span>
+                  <span class="fa fa-pencil"></span>
                 </button>
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                <button
+                  type="button "
+                  class="btn btn-outline-danger"
+                  (click)="onDelete(category._id)"
+                >
+                  <span class="fa fa-trash"></span>
+                </button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-            <ng-template #loading>
-                <div *ngIf="error$ | async; else loadingNoError">
-                    Erro ao carregar cursos, tente novamente mais tarde!
-                </div>
-                <ng-template #loadingNoError>
-                    <span>Carregando Categorias...</span>
-                </ng-template>
-            </ng-template>
-
-            <!--ng-template #loadingError>
-        <div *ngIf="error$ | async; else loading" >
-          Erro ao carregar cursos. Tente novamente mais tarde.
+      <ng-template #loading>
+        <div *ngIf="error$ | async; else loadingNoError">
+          Erro ao carregar cursos, tente novamente mais tarde!
         </div>
-        <ng-template #loading>
-            <span>Carregando Cursos...</span>
+        <ng-template #loadingNoError>
+          <span>Carregando Categorias...</span>
         </ng-template>
-      </ng-template -->
-        </div>
+      </ng-template>
     </div>
-
-    <!-- <ng-template #deleteModal>
-    <div class="modal-body text-center">
-        <p>Tem certeza que deseja remover esse curso?</p>
-        <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
-        <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
-    </div>
-</ng-template> -->
+  </div>
 </div>
-<!-- <ng-template #deleteModal>
-    <div class="modal-body text-center">
-        <p>Tem certeza que deseja remover a categoria?</p>
-        <button type="button" class="btn btn-default" (click)="onConfirm()">
-      Sim
-    </button>
-        <button type="button" class="btn btn-primary" (click)="onDecline()">
-      Não
-    </button>
-    </div>
-</ng-template> -->

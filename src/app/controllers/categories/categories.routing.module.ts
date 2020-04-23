@@ -7,10 +7,6 @@ import { CategoriesResolverGuard } from './guards/categories-resolver.guard';
 const routes: Routes = [
   {
     path: 'categories',
-    component: ListCategoriesComponent,
-  },
-  {
-    path: 'categories',
     children: [
       {
         path: '',

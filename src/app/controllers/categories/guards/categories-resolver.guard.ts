@@ -25,6 +25,4 @@ export class CategoriesResolverGuard implements Resolve<Category> {
       name: null
     })
   }
-
-
 }

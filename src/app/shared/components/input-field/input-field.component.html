@@ -1,8 +1,14 @@
-<div class="form-group col-md-4">
-    <label [attr.for]="id" class="control-label"> {{ label }}</label>
-    <input type="text" class="form-control" [id]="id" [ngClass]="{ 'is-invalid': classCss }" />
-    <div *ngIf="classCss">
-        <app-error-msg [control]="control" [label]="label"></app-error-msg>
-    </div>
-    <br />
+<div [formGroup]="formGroup" class="form-group col-md-4">
+  <label [attr.for]="id" class="control-label">{{ label }}</label>
+  <input
+    type="text"
+    class="form-control"
+    [id]="id"
+    [ngClass]="{ 'is-invalid': classCss }"
+    [formControlName]="controlName"
+  />
+  <div *ngIf="classCss">
+    <app-error-msg [control]="control" [label]="label"></app-error-msg>
+  </div>
+  <br />
 </div>
