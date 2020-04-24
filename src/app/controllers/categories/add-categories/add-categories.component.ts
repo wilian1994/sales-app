@@ -18,9 +18,7 @@ export class AddCategoriesComponent implements OnInit {
 
   ngOnInit() {
     const category =  this.route.snapshot.data['category'];
-    console.log(this.route.snapshot.data)
     this.createForm(category);
-    console.log(this.register.get('name').value,'name')
   }
 
   constructor(
@@ -40,20 +38,21 @@ export class AddCategoriesComponent implements OnInit {
   }
 
   private save(){
-    this.submitted = true;
-    if(this.register.valid){
-      const data  = this.register.value;
+    console.log('rtest')
+    // this.submitted = true;
+    // if(this.register.valid){
+    //   const data  = this.register.value;
 
-      this.categoriesService.save(data)
-      .subscribe(
-        // tslint:disable-next-line:no-console
-        ()  => {
-          this.alertModal.showAlertSucess('Produto salvo/editado com sucesso');
-          this.location.back();
-        },
-        err => console.error('Erro ao cadastrar categoria ', err)
-      )
-    }
+    //   this.categoriesService.save(data)
+    //   .subscribe(
+    //     // tslint:disable-next-line:no-console
+    //     ()  => {
+    //       this.alertModal.showAlertSucess('Produto salvo/editado com sucesso');
+    //       // this.location.back();
+    //     },
+    //     err => console.error('Erro ao cadastrar categoria ', err)
+    //   )
+    // }
   }
 
   hasError(field: string) {
@@ -65,8 +64,9 @@ export class AddCategoriesComponent implements OnInit {
   }
 
   onCancel(){
-    this.submitted = false;
-    this.register.reset();
-    this.router.navigateByUrl("/categories");
+    console.log('s')
+    // this.submitted = false;
+    // this.register.reset();
+    // this.router.navigateByUrl("/categories");
   }
 }
