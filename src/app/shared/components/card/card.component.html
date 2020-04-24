@@ -5,13 +5,44 @@
         <h4>{{ title }}</h4>
       </div>
       <div class="float-right">
-        <button type="button" class="btn btn-primary" onclick="onNew()">
+        <button type="button" class="btn btn-primary" (click)="onNew()">
           {{ subtitle }}
         </button>
       </div>
     </div>
     <div class="card-body">
-      <ng-content></ng-content>
+      <table class="table table-hover" *ngIf="data$ | async as data">
+        <thead>
+          <tr>
+            <th>Categorias</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of data">
+            <td>{{ item.name }}</td>
+            <td>
+              <span class="float-right">
+                <button
+                  type="button "
+                  class="btn btn-outline-primary"
+                  (click)="onEdit(item._id)"
+                >
+                  <span class="fa fa-pencil"></span>
+                </button>
+                <button
+                  type="button "
+                  class="btn btn-outline-danger"
+                  (click)="onDelete(item._id)"
+                >
+                  <span class="fa fa-trash"></span>
+                </button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <!-- <ng-template #loading>
         <div *ngIf="error$ | async; else loadingNoError">
           Erro ao carregar lojas, tente novamente mais tarde!
