@@ -38,21 +38,20 @@ export class AddCategoriesComponent implements OnInit {
   }
 
   private save(){
-    console.log('rtest')
-    // this.submitted = true;
-    // if(this.register.valid){
-    //   const data  = this.register.value;
+    this.submitted = true;
+    if(this.register.valid){
+      const data  = this.register.value;
 
-    //   this.categoriesService.save(data)
-    //   .subscribe(
-    //     // tslint:disable-next-line:no-console
-    //     ()  => {
-    //       this.alertModal.showAlertSucess('Produto salvo/editado com sucesso');
-    //       // this.location.back();
-    //     },
-    //     err => console.error('Erro ao cadastrar categoria ', err)
-    //   )
-    // }
+      this.categoriesService.save(data)
+      .subscribe(
+        // tslint:disable-next-line:no-console
+        ()  => {
+          this.alertModal.showAlertSucess('Produto salvo/editado com sucesso');
+          this.location.back();
+        },
+        err => console.error('Erro ao cadastrar categoria ', err)
+      )
+    }
   }
 
   hasError(field: string) {

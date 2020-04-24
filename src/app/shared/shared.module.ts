@@ -4,14 +4,15 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [AlertModalComponent, ConfirmModalComponent, ErrorMsgComponent, InputFieldComponent, CardComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     AlertModalComponent,
