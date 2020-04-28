@@ -1,1 +1,21 @@
-<p>add-stores works!</p>
+<div class="form-style">
+  <h2>Cadastrar Loja</h2>
+  <hr />
+  <form
+    *ngIf="register"
+    (ngSubmit)="save()"
+    class="needs-validation"
+    novalidate
+  >
+    <app-input-field
+      [classCss]="submitted && hasError('name')"
+      id="name"
+      label="Nome"
+      [control]="register.get('name')"
+      controlName="name"
+      [formGroup]="register"
+    ></app-input-field>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button (click)="onCancel()" class="btn btn-default">Cancelar</button>
+  </form>
+</div>

@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -14,6 +15,8 @@ import { ListStoresComponent } from './list-stores/list-stores.component';
     CommonModule,
     SharedModule,
     StoresRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class StoresModule { }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListStoresComponent } from './list-stores/list-stores.component';
+import { AddStoresComponent } from './add-stores/add-stores.component';
 
 const routes: Routes = [
   {
@@ -10,21 +11,14 @@ const routes: Routes = [
         path: '',
         component: ListStoresComponent,
       },
-      // {
-      //   path: 'edit/:id',
-      //   component: AddCategoriesComponent,
-      //   resolve: {
-      //     category: CategoriesResolverGuard
-      //   }
-      // },
-      // {
-      //   path: 'register',
-      //   component: AddCategoriesComponent,
-      //   resolve: {
-      //     category: CategoriesResolverGuard
-      //   }
-      // }
-
+      {
+        path: 'register',
+        component: AddStoresComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: AddStoresComponent,
+      },
     ]
   },
 ];

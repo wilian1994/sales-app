@@ -1,64 +1,11 @@
-<div class="container">
-  <div class="card mt-3">
-    <div class="card-header">
-      <div class="float-left">
-        <h4>Categorias</h4>
-      </div>
-      <div class="float-right">
-        <button
-          type="button"
-          class="btn btn-primary"
-          [routerLink]="['/categories/register']"
-        >
-          Nova Categoria
-        </button>
-      </div>
-    </div>
-    <div class="card-body">
-      <table
-        class="table table-hover"
-        *ngIf="categories$ | async as categories; else loading"
-      >
-        <thead>
-          <tr>
-            <th>Categorias</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let category of categories">
-            <td>{{ category.name }}</td>
-            <td>
-              <span class="float-right">
-                <button
-                  type="button "
-                  class="btn btn-outline-primary"
-                  (click)="onEdit(category._id)"
-                >
-                  <span class="fa fa-pencil"></span>
-                </button>
-                <button
-                  type="button "
-                  class="btn btn-outline-danger"
-                  (click)="onDelete(category._id)"
-                >
-                  <span class="fa fa-trash"></span>
-                </button>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <ng-template #loading>
-        <div *ngIf="error$ | async; else loadingNoError">
-          Erro ao carregar cursos, tente novamente mais tarde!
-        </div>
-        <ng-template #loadingNoError>
-          <span>Carregando Categorias...</span>
-        </ng-template>
-      </ng-template>
-    </div>
-  </div>
-</div>
+<app-card
+  title="Categorias"
+  subtitle="Nova Categoria"
+  [service]="service"
+  link="/categories/register"
+>
+  <tr thead>
+    <th>Categorias</th>
+    <th class="text-right">Acoes</th>
+  </tr>
+</app-card>

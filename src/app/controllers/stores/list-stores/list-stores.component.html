@@ -1,34 +1,11 @@
-<app-card>
-  <table class="table table-hover" *ngIf="stores$ | async as stores" teste>
-    <thead>
-      <tr>
-        <th>Categorias</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let store of stores">
-        <td>{{ store.name }}</td>
-        <td>
-          <span class="float-right">
-            <button
-              type="button "
-              class="btn btn-outline-primary"
-              (click)="onEdit(store._id)"
-            >
-              <span class="fa fa-pencil"></span>
-            </button>
-            <button
-              type="button "
-              class="btn btn-outline-danger"
-              (click)="onDelete(store._id)"
-            >
-              <span class="fa fa-trash"></span>
-            </button>
-          </span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<app-card
+  title="Lojas"
+  subtitle="Nova Loja"
+  [service]="service"
+  link="/stores/register"
+>
+  <tr thead>
+    <th>Categorias</th>
+    <th class="text-right">Acoes</th>
+  </tr>
 </app-card>
