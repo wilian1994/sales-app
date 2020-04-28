@@ -12,6 +12,11 @@ import { AppRoutingModule } from './app.routing.module';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { StoresModule } from './controllers/stores/stores.module';
+import { MarketplacesModule } from './controllers/marketplaces/marketplaces.module';
+import { PaymentTypesModule } from './controllers/paymentTypes/paymentTypes.module';
+import { ListProductsComponent } from './controllers/products/list-products/list-products.component';
+import { AddProductsComponent } from './controllers/products/add-products/add-products.component';
+import { ProductsModule } from './controllers/products/products.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +26,9 @@ import { StoresModule } from './controllers/stores/stores.module';
   imports: [
     CategoriesModule,
     StoresModule,
+    MarketplacesModule,
+    PaymentTypesModule,
+    ProductsModule,
     BrowserModule,
     AppRoutingModule,
     ModalModule.forRoot(),
@@ -31,7 +39,7 @@ import { StoresModule } from './controllers/stores/stores.module';
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
       }
-  }),
+  })
   ],
   providers: [],
   bootstrap: [AppComponent]

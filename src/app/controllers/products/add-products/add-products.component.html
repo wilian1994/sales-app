@@ -1,0 +1,33 @@
+<div class="form-style">
+  <h2>Cadastrar Produtos</h2>
+  <hr />
+  <form
+    *ngIf="register"
+    (ngSubmit)="save()"
+    class="needs-validation"
+    novalidate
+    [formGroup]="register"
+  >
+    <app-input-field
+      [classCss]="submitted && hasError('name')"
+      id="name"
+      label="Nome"
+      [control]="register.get('name')"
+      controlName="name"
+      [formGroup]="register"
+    ></app-input-field>
+
+    <div class="form-group col-md-4">
+      <label class="control-label">Categorias</label>
+      <select class="form-control" formControlName="category">
+        <option [ngValue]="null" disabled>Escolha uma categoria</option>
+        <option *ngFor="let category of categories$" [ngValue]="category._id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button (click)="onCancel()" class="btn btn-default">Cancelar</button>
+  </form>
+</div>

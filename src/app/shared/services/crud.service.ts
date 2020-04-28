@@ -8,6 +8,7 @@ export class CrudService<T> {
   constructor(protected httpClient: HttpClient, private API_URL: string) { }
 
   listAll(){
+    console.log('listall')
     return this.httpClient.get<T[]>(this.API_URL)
       .pipe(
         // delay(2000),
@@ -31,7 +32,6 @@ export class CrudService<T> {
   }
 
   save(record: T){
-    console.log('record: ', record)
     if(record['_id']){
       return this.edit(record)
     }

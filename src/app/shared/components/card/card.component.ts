@@ -15,9 +15,6 @@ export class CardComponent implements OnInit {
   title: string;
 
   @Input()
-  subtitle: string;
-
-  @Input()
   service: any;
 
   @Input()
@@ -37,7 +34,7 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
     this.listAll();
-    console.log(this.data$)
+    console.log('card component')
   }
 
   onNew() {

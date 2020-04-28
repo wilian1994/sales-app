@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ListCategoriesComponent } from './controllers/categories/list-categories/list-categories.component';
-import { AddCategoriesComponent } from './controllers/categories/add-categories/add-categories.component';
 
 const routes: Routes = [
 
@@ -12,6 +10,18 @@ const routes: Routes = [
   {
     path: 'categories',
     loadChildren: () => import('./controllers/categories/categories.module').then(m => m.CategoriesModule),
+  },
+  {
+    path: 'marketplaces',
+    loadChildren: () => import('./controllers/marketplaces/marketplaces.module').then(m => m.MarketplacesModule),
+  },
+  {
+    path: 'paymentTypes',
+    loadChildren: () => import('./controllers/paymentTypes/paymentTypes.module').then(m => m.PaymentTypesModule),
+  },
+  {
+    path: 'products',
+    loadChildren: () => import('./controllers/products/products.module').then(m => m.ProductsModule),
   }
 ];
 
