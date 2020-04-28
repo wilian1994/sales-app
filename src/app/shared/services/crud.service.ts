@@ -31,6 +31,7 @@ export class CrudService<T> {
   }
 
   save(record: T){
+    console.log('record: ', record)
     if(record['_id']){
       return this.edit(record)
     }

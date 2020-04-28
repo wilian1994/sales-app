@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, Subject } from 'rxjs';
 import { AlertModalService } from '../../services/alert-modal.service';
-import { take, switchMap } from 'rxjs/operators';
+import { take, switchMap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-card',
@@ -24,7 +24,10 @@ export class CardComponent implements OnInit {
   link: string;
 
   @Input()
+  columns: any [] = ["name"];
+
   data$: any;
+  error$ = new Subject<boolean>();
 
   constructor(
     private router: Router,
@@ -33,6 +36,7 @@ export class CardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.listAll();
     console.log(this.data$)
   }
 
@@ -52,9 +56,24 @@ export class CardComponent implements OnInit {
       switchMap(result => result ? this.service.delete(id) : EMPTY)
     )
     .subscribe(
-      () => this.service.listAll(),
+      () => this.listAll(),
       (err)  => alert('ERRO ao remover o produto')
     )
+  }
+
+  listAll(){
+    this.data$ = this.service.listAll()
+      .pipe(
+        catchError((error: any) => {
+          this.handleError()
+          // this.error$.next(true);
+          return EMPTY;
+        })
+      )
+  }
+
+  handleError(){
+    this.alertService.showAlertDanger('Erro ao carregar categorias. Tente novamentes  mais tarde!');
   }
 
 }

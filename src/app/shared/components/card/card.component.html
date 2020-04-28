@@ -13,15 +13,12 @@
     <div class="card-body">
       <table class="table table-hover" *ngIf="data$ | async as data">
         <thead>
-          <tr>
-            <th>Categorias</th>
-            <th></th>
-          </tr>
+          <ng-content select="[thead]"></ng-content>
         </thead>
 
         <tbody>
           <tr *ngFor="let item of data">
-            <td>{{ item.name }}</td>
+            <td *ngFor="let col of columns">{{ item[col] }}</td>
             <td>
               <span class="float-right">
                 <button
@@ -43,7 +40,7 @@
           </tr>
         </tbody>
       </table>
-      <!-- <ng-template #loading>
+      <ng-template #loading>
         <div *ngIf="error$ | async; else loadingNoError">
           Erro ao carregar lojas, tente novamente mais tarde!
         </div>
@@ -51,7 +48,6 @@
           <span>Carregando Lojas...</span>
         </ng-template>
       </ng-template>
-      -->
     </div>
   </div>
 </div>
