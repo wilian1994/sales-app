@@ -17,6 +17,9 @@ import { PaymentTypesModule } from './controllers/paymentTypes/paymentTypes.modu
 import { ListProductsComponent } from './controllers/products/list-products/list-products.component';
 import { AddProductsComponent } from './controllers/products/add-products/add-products.component';
 import { ProductsModule } from './controllers/products/products.module';
+import { AddOrdersComponent } from './controllers/orders/add-orders/add-orders.component';
+import { ListAwaitingComponent } from './controllers/orders/list-awaiting/list-awaiting.component';
+import { OrdersModule } from './controllers/orders/orders.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { ProductsModule } from './controllers/products/products.module';
     MarketplacesModule,
     PaymentTypesModule,
     ProductsModule,
+    OrdersModule,
     BrowserModule,
     AppRoutingModule,
     ModalModule.forRoot(),

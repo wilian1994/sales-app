@@ -1,0 +1,102 @@
+<div class="form-style">
+  <h2>Cadastrar Pedidos</h2>
+  <hr />
+  <form
+    *ngIf="register"
+    (ngSubmit)="save()"
+    class="needs-validation"
+    novalidate
+    [formGroup]="register"
+  >
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label class="control-label">Produtos</label>
+        <select class="form-control" formControlName="product">
+          <option [ngValue]="null" disabled>Escolha uma Produto</option>
+          <option *ngFor="let product of products$" [ngValue]="product._id">
+            {{ product.name }}
+          </option>
+        </select>
+      </div>
+
+      <app-input-field
+        [classCss]="submitted && hasError('requestCode')"
+        id="requestCode"
+        label="Nu. Pedido"
+        [control]="register.get('requestCode')"
+        controlName="requestCode"
+        [formGroup]="register"
+        class="form-group col-md-3"
+      ></app-input-field>
+
+      <div class="form-group col-md-2">
+        <label class="control-label">Lojas</label>
+        <select class="form-control" formControlName="store">
+          <option [ngValue]="null" disabled>Escolha uma Loja</option>
+          <option *ngFor="let store of stores$" [ngValue]="store._id">
+            {{ store.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <app-input-field
+        [classCss]="submitted && hasError('tracking')"
+        id="tracking"
+        label="Rastreio"
+        [control]="register.get('tracking')"
+        controlName="tracking"
+        [formGroup]="register"
+        class="form-group col-md-2"
+      ></app-input-field>
+
+      <div class="form-group col-md-2">
+        <label class="control-label">Lojas</label>
+        <select class="form-control" formControlName="paymentType">
+          <option [ngValue]="null" disabled>
+            Escolha um Tipo de Pagamento
+          </option>
+          <option
+            *ngFor="let paymentType of paymentTypes$"
+            [ngValue]="paymentType._id"
+          >
+            {{ paymentType.name }}
+          </option>
+        </select>
+      </div>
+
+      <app-input-field
+        [classCss]="submitted && hasError('investor')"
+        id="purchaseDate"
+        label="Investidor"
+        [control]="register.get('investor')"
+        controlName="investor"
+        [formGroup]="register"
+        class="form-group col-md-3"
+      ></app-input-field>
+    </div>
+    <div class="form-row">
+      <app-input-field
+        [classCss]="submitted && hasError('purchaseValue')"
+        id="purchaseValue"
+        label="Valor da Compra"
+        [control]="register.get('purchaseValue')"
+        controlName="purchaseValue"
+        [formGroup]="register"
+        class="form-group col-md-3"
+      ></app-input-field>
+
+      <app-input-field
+        [classCss]="submitted && hasError('purchaseDate')"
+        id="purchaseDate"
+        label="Data da Compra"
+        [control]="register.get('purchaseDate')"
+        controlName="purchaseDate"
+        [formGroup]="register"
+        class="form-group col-md-3"
+      ></app-input-field>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button (click)="onCancel()" class="btn btn-default">Cancelar</button>
+  </form>
+</div>
