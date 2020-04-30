@@ -1,25 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/components/header/header.component';
+
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { CategoriesModule } from './controllers/categories/categories.module';
-import { AppRoutingModule } from './app.routing.module';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+import { AppRoutingModule } from './app.routing.module';
+import { MaterialModule } from './material.example.module';
 import { StoresModule } from './controllers/stores/stores.module';
 import { MarketplacesModule } from './controllers/marketplaces/marketplaces.module';
 import { PaymentTypesModule } from './controllers/paymentTypes/paymentTypes.module';
-import { ListProductsComponent } from './controllers/products/list-products/list-products.component';
-import { AddProductsComponent } from './controllers/products/add-products/add-products.component';
 import { ProductsModule } from './controllers/products/products.module';
-import { AddOrdersComponent } from './controllers/orders/add-orders/add-orders.component';
-import { ListAwaitingComponent } from './controllers/orders/list-awaiting/list-awaiting.component';
 import { OrdersModule } from './controllers/orders/orders.module';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { MatToolbarModule, MatSidenavModule, MatDividerModule, MatIconModule, MatMenuModule } from '@angular/material';
+
+
 
 @NgModule({
   declarations: [
@@ -43,7 +46,13 @@ import { OrdersModule } from './controllers/orders/orders.module';
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
       }
-  })
+  }),
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

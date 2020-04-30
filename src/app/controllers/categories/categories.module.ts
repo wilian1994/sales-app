@@ -5,6 +5,7 @@ import { ListCategoriesComponent } from './list-categories/list-categories.compo
 import { AddCategoriesComponent } from './add-categories/add-categories.component';
 import { CategoriesRoutingModule } from './categories.routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule, MatIconModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     CategoriesRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class CategoriesModule { }

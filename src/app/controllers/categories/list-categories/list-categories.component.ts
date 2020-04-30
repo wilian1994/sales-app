@@ -14,16 +14,35 @@ import { CategoriesService } from '../add-categories/categories.service';
 })
 export class ListCategoriesComponent implements OnInit {
 
-  categories$: Observable<Category[]>;
   service: any;
+
+  displayedColumns = ['name', 'star'];
+  categories$: Observable<Category[]>;
+  headerColums: ['Name', 'Teste'];
 
   constructor(
     private categoriesService: CategoriesService,
+    private alertService: AlertModalService
   ) { }
 
   ngOnInit() {
-    this.service = this.categoriesService;
+    this.listAll();
 
+  }
+
+  listAll(){
+    this.categories$ = this.categoriesService.listAll()
+      .pipe(
+        catchError((error: any) => {
+          this.handleError()
+          // this.error$.next(true);
+          return EMPTY;
+        })
+      )
+  }
+
+  handleError(){
+    this.alertService.showAlertDanger('Erro ao carregar pedidos. Tente novamentes  mais tarde!');
   }
 
   // handleError(){
