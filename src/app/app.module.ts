@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,  CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -13,14 +13,14 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app.routing.module';
-import { MaterialModule } from './material.example.module';
 import { StoresModule } from './controllers/stores/stores.module';
 import { MarketplacesModule } from './controllers/marketplaces/marketplaces.module';
 import { PaymentTypesModule } from './controllers/paymentTypes/paymentTypes.module';
 import { ProductsModule } from './controllers/products/products.module';
 import { OrdersModule } from './controllers/orders/orders.module';
 import { HeaderComponent } from './shared/components/header/header.component';
-import { MatToolbarModule, MatSidenavModule, MatDividerModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { MatToolbarModule, MatSidenavModule, MatDividerModule, MatIconModule, MatMenuModule, MatButtonModule, MatListModule } from '@angular/material';
+import { AddCategoriesNewComponent } from './controllers/categories/add-categories-new/add-categories-new.component';
 
 
 
@@ -53,9 +53,12 @@ import { MatToolbarModule, MatSidenavModule, MatDividerModule, MatIconModule, Ma
     MatIconModule,
     MatSidenavModule,
     MatMenuModule,
+    MatButtonModule,
+    MatListModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
 

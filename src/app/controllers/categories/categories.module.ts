@@ -1,3 +1,4 @@
+import { AddCategoriesNewComponent } from './add-categories-new/add-categories-new.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -5,12 +6,13 @@ import { ListCategoriesComponent } from './list-categories/list-categories.compo
 import { AddCategoriesComponent } from './add-categories/add-categories.component';
 import { CategoriesRoutingModule } from './categories.routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { MaterialModule } from 'src/app/material.example.module';
 
 @NgModule({
   declarations: [
     ListCategoriesComponent,
     AddCategoriesComponent,
+    AddCategoriesNewComponent,
   ],
   imports: [
     CommonModule,
@@ -18,9 +20,7 @@ import { MatTableModule, MatIconModule, MatButtonModule } from '@angular/materia
     CategoriesRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule
+    MaterialModule,
   ]
 })
 export class CategoriesModule { }

@@ -16,13 +16,14 @@ export class ListCategoriesComponent implements OnInit {
 
   service: any;
 
-  displayedColumns = ['name', 'star'];
+  displayedColumns = ['name', 'actions'];
   categories$: Observable<Category[]>;
-  headerColums: ['Name', 'Teste'];
 
   constructor(
     private categoriesService: CategoriesService,
-    private alertService: AlertModalService
+    private alertService: AlertModalService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -49,21 +50,21 @@ export class ListCategoriesComponent implements OnInit {
   //   this.alertService.showAlertDanger('Erro ao carregar categorias. Tente novamentes  mais tarde!');
   // }
 
-  // onEdit(id: string){
-  //   this.router.navigate(['edit', id], {relativeTo: this.route});
-  // }
+  onEdit(id: string){
+    this.router.navigate(['edit', id], {relativeTo: this.route});
+  }
 
-  // onDelete(id: string){
-  //   const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja removar este registro', 'Não', 'Sim');
-  //   result$.asObservable()
-  //   .pipe(
-  //     take(1),
-  //     switchMap(result => result ? this.categoriesService.delete(id) : EMPTY)
-  //   )
-  //   .subscribe(
-  //     () => this.listCategories(),
-  //     (err)  => alert('ERRO ao remover o produto')
-  //   )
-  // }
+  onDelete(id: string){
+    const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja removar este registro', 'Não', 'Sim');
+    result$.asObservable()
+    .pipe(
+      take(1),
+      switchMap(result => result ? this.categoriesService.delete(id) : EMPTY)
+    )
+    .subscribe(
+      () => this.listAll(),
+      (err)  => alert('ERRO ao remover o produto')
+    )
+  }
 
 }

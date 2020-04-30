@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
 import { AddCategoriesComponent } from './add-categories/add-categories.component';
 import { CategoriesResolverGuard } from './guards/categories-resolver.guard';
+import { AddCategoriesNewComponent } from './add-categories-new/add-categories-new.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'register',
-        component: AddCategoriesComponent,
+        component: AddCategoriesNewComponent,
         resolve: {
           category: CategoriesResolverGuard
         }
