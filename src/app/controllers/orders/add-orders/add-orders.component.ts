@@ -12,6 +12,7 @@ import { Store } from 'src/app/shared/models/Store';
 import { PaymentTypesService } from '../../paymentTypes/paymentTypes.service';
 import { PaymentType } from 'src/app/shared/models/PaymentType';
 import { STATUS } from 'src/app/shared/models/Status';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-orders',
@@ -23,7 +24,10 @@ export class AddOrdersComponent implements OnInit {
   register: FormGroup;
   submitted: boolean = false;
   id: string;
+
   products$:  Product[] = [];
+  filteredProducts$:   Observable<Product[]>;
+
   stores$:  Store[] = [];
   paymentTypes$: PaymentType[] = [];
 
@@ -40,6 +44,7 @@ export class AddOrdersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.loadProducts();
     this.loadStores();
     this.loadPaymentTypes();
@@ -58,14 +63,14 @@ export class AddOrdersComponent implements OnInit {
     console.log('order', order)
     this.register = this.formBuilder.group({
       _id: [order ? order._id : null],
-      product: [order ? order.product._id : '' , Validators.required],
+      product: [order ? order.product: '' , Validators.required],
       requestCode: [order ? order.requestCode : '' , Validators.required],
-      store: [order ? order.store._id : '' , Validators.required],
+      store: [order ? order.store : '' , Validators.required],
       tracking: [order ? order.tracking : '' , Validators.required],
       purchaseValue: [order ? order.purchaseValue : '' , Validators.required],
       purchaseDate: [order ? order.purchaseDate : '' , Validators.required],
       investor: [order ? order.investor : '' , Validators.required],
-      paymentType: [order ? order.paymentType._id : '' , Validators.required],
+      paymentType: [order ? order.paymentType : '' , Validators.required],
       status: [STATUS.AWAITING],
     })
   }
@@ -100,7 +105,7 @@ export class AddOrdersComponent implements OnInit {
     )
   }
 
-  private save(){
+  onSave(){
     console.log('call save')
     this.submitted = true;
     console.log(this.register.value)

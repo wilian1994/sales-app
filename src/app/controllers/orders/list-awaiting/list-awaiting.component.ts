@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListAwaitingComponent implements OnInit {
 
   data$: any;
+  displayedColumns = ['name', 'store', 'requestCode', 'tracking', 'purchaseValue', 'purchaseDate', 'actions'];
   error$ = new Subject<boolean>();
 
   constructor(

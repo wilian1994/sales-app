@@ -42,3 +42,40 @@ td.mat-cell:last-of-type {
 .mat-card-title.title-card {
   margin-bottom: 50px;
 }
+
+table {
+  width: 100%;
+  text-align: center;
+}
+
+.container {
+  padding-top: 20px;
+}
+
+td {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th.mat-column-position,
+td.mat-column-position {
+  padding-left: 8px;
+}
+
+.mat-table-sticky:first-child {
+  border-right: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky:last-child {
+  border-left: 1px solid #e0e0e0;
+}
+
+.action {
+  width: 161px;
+}
+
+.newer {
+  margin-bottom: 13px;
+}

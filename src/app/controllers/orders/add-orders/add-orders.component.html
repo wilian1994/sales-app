@@ -1,4 +1,4 @@
-<div class="form-style">
+<!-- <div class="form-style">
   <h2>Cadastrar Pedidos</h2>
   <hr />
   <form
@@ -99,4 +99,112 @@
     <button type="submit" class="btn btn-primary">Salvar</button>
     <button (click)="onCancel()" class="btn btn-default">Cancelar</button>
   </form>
+</div> -->
+<div class="main-div">
+  <mat-card class="center width50">
+    <mat-card-title class="title-card">Cadastrar Pedido</mat-card-title>
+    <form
+      autocomplete="off"
+      novalidate
+      [formGroup]="register"
+      *ngIf="register"
+      (ngSubmit)="onSave()"
+    >
+      <mat-card-content>
+        <mat-form-field class="full-width">
+          <mat-label>Escolha um Produto</mat-label>
+          <mat-select formControlName="product">
+            <mat-option *ngFor="let product of products$" [value]="product._id">
+              {{ product.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Pedido"
+            name="requestCode"
+            formControlName="requestCode"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Escolha um Loja</mat-label>
+          <mat-select formControlName="store">
+            <mat-option *ngFor="let store of stores$" [value]="store._id">
+              {{ store.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Rastreio"
+            name="tracking"
+            formControlName="tracking"
+          />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Escolha um Tipo de Pagamento</mat-label>
+          <mat-select formControlName="paymentType">
+            <mat-option
+              *ngFor="let paymentType of paymentTypes$"
+              [value]="paymentType._id"
+            >
+              {{ paymentType.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Investidor"
+            name="investor"
+            formControlName="investor"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Data da Compra</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            (focus)="picker.open()"
+            formControlName="purchaseDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Valor Pago"
+            name="purchaseValue"
+            type="value"
+            class="input-purchaseValue"
+            formControlName="purchaseValue"
+            currencyMask
+          />
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button
+          type="reset"
+          color="default"
+          mat-raised-button
+          (click)="onCancel()"
+        >
+          Cancelar
+        </button>
+        <button type="submit" color="primary" mat-raised-button>Salvar</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
 </div>

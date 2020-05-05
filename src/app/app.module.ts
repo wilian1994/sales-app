@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule,  CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { NgModule,  CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID  } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {registerLocaleData} from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
 import { AppComponent } from './app.component';
 
@@ -20,9 +22,9 @@ import { ProductsModule } from './controllers/products/products.module';
 import { OrdersModule } from './controllers/orders/orders.module';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { MatToolbarModule, MatSidenavModule, MatDividerModule, MatIconModule, MatMenuModule, MatButtonModule, MatListModule } from '@angular/material';
-import { AddCategoriesNewComponent } from './controllers/categories/add-categories-new/add-categories-new.component';
 
 
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
   declarations: [
@@ -56,7 +58,12 @@ import { AddCategoriesNewComponent } from './controllers/categories/add-categori
     MatButtonModule,
     MatListModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt'
+  }
+  ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
