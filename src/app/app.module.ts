@@ -21,7 +21,10 @@ import { PaymentTypesModule } from './controllers/paymentTypes/paymentTypes.modu
 import { ProductsModule } from './controllers/products/products.module';
 import { OrdersModule } from './controllers/orders/orders.module';
 import { HeaderComponent } from './shared/components/header/header.component';
-import { MatToolbarModule, MatSidenavModule, MatDividerModule, MatIconModule, MatMenuModule, MatButtonModule, MatListModule } from '@angular/material';
+import { MaterialModule } from './material.example.module';
+import { ListReceivedComponent } from './controllers/orders/list-received/list-received.component';
+import { ListPendingComponent } from './controllers/orders/list-pending/list-pending.component';
+import { ListFinalizedComponent } from './controllers/orders/list-finalized/list-finalized.component';
 
 
 registerLocaleData(localePt, 'pt');
@@ -30,6 +33,9 @@ registerLocaleData(localePt, 'pt');
   declarations: [
     AppComponent,
     HeaderComponent,
+    ListReceivedComponent,
+    ListPendingComponent,
+    ListFinalizedComponent,
   ],
   imports: [
     CategoriesModule,
@@ -50,13 +56,7 @@ registerLocaleData(localePt, 'pt');
       }
   }),
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatListModule
+    MaterialModule
   ],
   providers: [
     {

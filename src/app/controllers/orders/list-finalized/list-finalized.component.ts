@@ -7,14 +7,12 @@ import { EMPTY, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
-
-
 @Component({
-  selector: 'app-list-awaiting',
-  templateUrl: './list-awaiting.component.html',
-  styleUrls: ['./list-awaiting.component.css']
+  selector: 'app-list-finalized',
+  templateUrl: './list-finalized.component.html',
+  styleUrls: ['./list-finalized.component.css']
 })
-export class ListAwaitingComponent implements OnInit {
+export class ListFinalizedComponent implements OnInit {
 
   data$: any;
   displayedColumns = ['name', 'store', 'tracking', 'purchaseValue', 'actions'];
@@ -72,5 +70,4 @@ export class ListAwaitingComponent implements OnInit {
     });
 
   }
-
 }

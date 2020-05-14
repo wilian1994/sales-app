@@ -14,3 +14,14 @@
 .mat-toolbar.mat-primary {
   background: #131151;
 }
+
+.mat-content {
+  display: flex;
+  padding: 0 16px;
+  align-items: center;
+}
+
+.mat-expansion-panel-header {
+  padding: 0px 0px;
+  padding-right: 20px;
+}

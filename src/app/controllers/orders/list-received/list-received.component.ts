@@ -1,21 +1,18 @@
-import { DialogModalComponent } from './../../../shared/components/dialog-modal/dialog-modal.component';
-import { catchError, take, switchMap } from 'rxjs/operators';
-import { OrdersService } from './../orders.service';
+import { switchMap, take, catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { AlertModalService } from 'src/app/shared/services/alert-modal.service';
 import { EMPTY, Subject } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { DialogModalComponent } from 'src/app/shared/components/dialog-modal/dialog-modal.component';
+import { OrdersService } from '../orders.service';
+import { AlertModalService } from 'src/app/shared/services/alert-modal.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
-
-
 @Component({
-  selector: 'app-list-awaiting',
-  templateUrl: './list-awaiting.component.html',
-  styleUrls: ['./list-awaiting.component.css']
+  selector: 'app-list-received',
+  templateUrl: './list-received.component.html',
+  styleUrls: ['./list-received.component.css']
 })
-export class ListAwaitingComponent implements OnInit {
-
+export class ListReceivedComponent implements OnInit {
   data$: any;
   displayedColumns = ['name', 'store', 'tracking', 'purchaseValue', 'actions'];
   error$ = new Subject<boolean>();

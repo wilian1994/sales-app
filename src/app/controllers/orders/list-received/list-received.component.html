@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="newer float-right">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['orders/register']"
+    >
+      Adicionar
+    </button>
+  </div>
+  <table mat-table [dataSource]="data$">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let element">{{ element.product.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="store">
+      <th mat-header-cell *matHeaderCellDef>Loja</th>
+      <td mat-cell *matCellDef="let element">{{ element.store.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="tracking">
+      <th mat-header-cell *matHeaderCellDef>Rastreio</th>
+      <td mat-cell *matCellDef="let element">{{ element.tracking }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="purchaseValue">
+      <th mat-header-cell *matHeaderCellDef>Valor</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.purchaseValue | currency: "R$" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="purchaseDate">
+      <th mat-header-cell *matHeaderCellDef>Data</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.purchaseDate | date: "dd/MM/yyyy" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef class="action">Ações</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Edit"
+          (click)="onEdit(element._id)"
+        >
+          <mat-icon class="action-button">edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="accent"
+          aria-label="More"
+          (click)="openDialog()"
+        >
+          <mat-icon class="action-button">visibility</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          aria-label="Delete"
+          (click)="onDelete(element._id)"
+        >
+          <mat-icon class="action-button">delete</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="More" (click)="openDialog()">
+          <mat-icon class="action-button button-check">local_atm</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

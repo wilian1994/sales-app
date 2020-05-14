@@ -7,14 +7,13 @@ import { EMPTY, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
-
-
 @Component({
-  selector: 'app-list-awaiting',
-  templateUrl: './list-awaiting.component.html',
-  styleUrls: ['./list-awaiting.component.css']
+  selector: 'app-list-pending',
+  templateUrl: './list-pending.component.html',
+  styleUrls: ['./list-pending.component.css']
 })
-export class ListAwaitingComponent implements OnInit {
+export class ListPendingComponent implements OnInit {
+
 
   data$: any;
   displayedColumns = ['name', 'store', 'tracking', 'purchaseValue', 'actions'];
