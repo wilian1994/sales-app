@@ -6,6 +6,8 @@ import { AlertModalService } from 'src/app/shared/services/alert-modal.service';
 import { EMPTY, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import { Order } from 'src/app/shared/models/Order';
+import { STATUS } from 'src/app/shared/models/Status';
 
 
 
@@ -24,6 +26,7 @@ export class ListAwaitingComponent implements OnInit {
     private ordersService: OrdersService,
     private alertService: AlertModalService,
     private router: Router,
+    private alertModal: AlertModalService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
   ) { }
@@ -33,7 +36,7 @@ export class ListAwaitingComponent implements OnInit {
   }
 
   listAll(){
-    this.data$ = this.ordersService.listAll()
+    this.data$ = this.ordersService.listAllByStatus(STATUS.AWAITING)
       .pipe(
         catchError((error: any) => {
           this.handleError()
@@ -71,6 +74,19 @@ export class ListAwaitingComponent implements OnInit {
       data: {}
     });
 
+  }
+
+  onChangeStatus(order: Order): void {
+    const data: any  = {_id: order._id , status: STATUS.RECEIVED}
+    this.ordersService.save(data)
+      .subscribe(
+        // tslint:disable-next-line:no-console
+        ()  => {
+          this.alertModal.showAlertSucess('Order alterada para Recebida com sucesso');
+          this.listAll();
+        },
+        err => console.error('Erro ao cadastrar loja ', err)
+      )
   }
 
 }

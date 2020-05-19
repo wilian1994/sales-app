@@ -6,6 +6,8 @@ import { OrdersService } from '../orders.service';
 import { AlertModalService } from 'src/app/shared/services/alert-modal.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import { STATUS } from 'src/app/shared/models/Status';
+import { DialogPendingComponent } from 'src/app/shared/components/dialog-pending/dialog-pending.component';
 
 @Component({
   selector: 'app-list-received',
@@ -30,7 +32,7 @@ export class ListReceivedComponent implements OnInit {
   }
 
   listAll(){
-    this.data$ = this.ordersService.listAll()
+    this.data$ = this.ordersService.listAllByStatus(STATUS.RECEIVED)
       .pipe(
         catchError((error: any) => {
           this.handleError()
@@ -68,6 +70,18 @@ export class ListReceivedComponent implements OnInit {
       data: {}
     });
 
+  }
+
+  onChangeStatus(): void {
+    const dialogRef = this.dialog.open(DialogPendingComponent, {
+      height: '300px',
+      width: '300px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    })
   }
 
 }

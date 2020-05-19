@@ -1,3 +1,4 @@
+import { STATUS } from 'src/app/shared/models/Status';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -13,5 +14,12 @@ export class OrdersService extends CrudService<Order> {
 
   constructor(protected httpClient: HttpClient) {
     super(httpClient, `${environment.API}orders`);
+  }
+
+  listAllByStatus(status: any){
+    return this.httpClient.get<Order[]>(`${environment.API}orders/status/${status}`)
+      .pipe(
+        // delay(2000),
+      );
   }
 }

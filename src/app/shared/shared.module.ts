@@ -8,9 +8,10 @@ import { InputFieldComponent } from './components/input-field/input-field.compon
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CardComponent } from './components/card/card.component';
 import { DialogModalComponent } from './components/dialog-modal/dialog-modal.component';
+import { DialogPendingComponent } from './components/dialog-pending/dialog-pending.component';
 
 @NgModule({
-  declarations: [AlertModalComponent, ConfirmModalComponent, ErrorMsgComponent, InputFieldComponent, CardComponent, DialogModalComponent],
+  declarations: [AlertModalComponent, ConfirmModalComponent, ErrorMsgComponent, InputFieldComponent, CardComponent, DialogModalComponent, DialogPendingComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -27,8 +28,8 @@ import { DialogModalComponent } from './components/dialog-modal/dialog-modal.com
     entryComponents: [
       AlertModalComponent,
       ConfirmModalComponent,
-      DialogModalComponent
-
+      DialogModalComponent,
+      DialogPendingComponent
     ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

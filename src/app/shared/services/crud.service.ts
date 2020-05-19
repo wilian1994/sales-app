@@ -25,6 +25,7 @@ export class CrudService<T> {
 
   view(id: string): Observable<T>{
     return this.httpClient.get<T>(`${this.API_URL}/${id}`).pipe(take(1));
+
   }
 
   private edit(record: T): Observable<T>{

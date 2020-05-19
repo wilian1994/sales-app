@@ -13,4 +13,12 @@ export class CategoriesService extends CrudService<Category> {
   constructor(protected httpClient: HttpClient) {
     super(httpClient, `${environment.API}categories`);
   }
+
+  listAllOrdersAwaiting(){
+    return this.httpClient.get<Category[]>(`${environment.API}ordersByStatus`)
+      .pipe(
+        // delay(2000),
+      );
+  }
+
 }
