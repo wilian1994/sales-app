@@ -1,3 +1,4 @@
+import { Order } from 'src/app/shared/models/Order';
 import { DialogModalComponent } from './../../../shared/components/dialog-modal/dialog-modal.component';
 import { catchError, take, switchMap } from 'rxjs/operators';
 import { OrdersService } from './../orders.service';
@@ -6,6 +7,7 @@ import { AlertModalService } from 'src/app/shared/services/alert-modal.service';
 import { EMPTY, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import { STATUS } from 'src/app/shared/models/Status';
 
 @Component({
   selector: 'app-list-pending',
@@ -14,17 +16,18 @@ import { MatDialog } from '@angular/material';
 })
 export class ListPendingComponent implements OnInit {
 
-
   data$: any;
-  displayedColumns = ['name', 'store', 'tracking', 'purchaseValue', 'actions'];
+  displayedColumns = ['name', 'store', 'salesValue', 'lucro', 'actions'];
   error$ = new Subject<boolean>();
 
   constructor(
     private ordersService: OrdersService,
     private alertService: AlertModalService,
+    private alertModal: AlertModalService,
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
+
   ) { }
 
   ngOnInit() {
@@ -32,14 +35,14 @@ export class ListPendingComponent implements OnInit {
   }
 
   listAll(){
-    this.data$ = this.ordersService.listAll()
+    this.data$ = this.ordersService.listAllByStatus(STATUS.TORECEIVED)
       .pipe(
         catchError((error: any) => {
           this.handleError()
           // this.error$.next(true);
           return EMPTY;
         })
-      )
+    )
   }
 
   handleError(){
@@ -70,6 +73,19 @@ export class ListPendingComponent implements OnInit {
       data: {}
     });
 
+  }
+
+  onChangeStatus(order: Order): void {
+    const data: any  = {_id: order._id , status: STATUS.FINALIZED}
+    this.ordersService.save(data)
+      .subscribe(
+        // tslint:disable-next-line:no-console
+        ()  => {
+          this.alertModal.showAlertSucess('Order alterada para Recebida com sucesso');
+          this.listAll();
+        },
+        err => console.error('Erro ao cadastrar loja ', err)
+      )
   }
 
 }

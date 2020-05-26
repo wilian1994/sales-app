@@ -1,3 +1,6 @@
+import { ListFinalizedComponent } from './list-finalized/list-finalized.component';
+import { ListPendingComponent } from './list-pending/list-pending.component';
+import { ListReceivedComponent } from 'src/app/controllers/orders/list-received/list-received.component';
 import { AddOrdersComponent } from './add-orders/add-orders.component';
 import { ListAwaitingComponent } from './list-awaiting/list-awaiting.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +15,10 @@ import {CustomCurrencyMaskConfig} from '../../shared/utils/CustomCurrencyMaskCon
 @NgModule({
   declarations: [
     ListAwaitingComponent,
-    AddOrdersComponent
+    ListReceivedComponent,
+    ListPendingComponent,
+    ListFinalizedComponent,
+    AddOrdersComponent,
   ],
   imports: [
     CommonModule,

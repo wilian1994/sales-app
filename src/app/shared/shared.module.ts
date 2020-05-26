@@ -1,4 +1,8 @@
+import { CustomCurrencyMaskConfig } from './utils/CustomCurrencyMaskConfig';
+import { CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { MaterialModule } from './../material.example.module';
+import { FooterComponent } from './components/footer/footer.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
@@ -11,12 +15,24 @@ import { DialogModalComponent } from './components/dialog-modal/dialog-modal.com
 import { DialogPendingComponent } from './components/dialog-pending/dialog-pending.component';
 
 @NgModule({
-  declarations: [AlertModalComponent, ConfirmModalComponent, ErrorMsgComponent, InputFieldComponent, CardComponent, DialogModalComponent, DialogPendingComponent],
+  declarations: [
+    AlertModalComponent,
+    ConfirmModalComponent,
+    ErrorMsgComponent,
+    InputFieldComponent,
+    CardComponent,
+    DialogModalComponent,
+    DialogPendingComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    CurrencyMaskModule
+  ],
+  providers: [
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
   exports: [
     AlertModalComponent,
@@ -25,13 +41,13 @@ import { DialogPendingComponent } from './components/dialog-pending/dialog-pendi
     InputFieldComponent,
     CardComponent
   ],
-    entryComponents: [
-      AlertModalComponent,
-      ConfirmModalComponent,
-      DialogModalComponent,
-      DialogPendingComponent
-    ],
-    schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  entryComponents: [
+    AlertModalComponent,
+    ConfirmModalComponent,
+    DialogModalComponent,
+    DialogPendingComponent
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class SharedModule {
 

@@ -71,6 +71,7 @@ export class AddOrdersComponent implements OnInit {
       purchaseDate: [order ? order.purchaseDate : '' , Validators.required],
       investor: [order ? order.investor : '' , Validators.required],
       paymentType: [order ? order.paymentType : '' , Validators.required],
+      quantity: [order ? order.quantity : '' , Validators.required],
       status: [STATUS.AWAITING],
     })
   }

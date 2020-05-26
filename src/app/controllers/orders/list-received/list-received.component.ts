@@ -22,6 +22,7 @@ export class ListReceivedComponent implements OnInit {
   constructor(
     private ordersService: OrdersService,
     private alertService: AlertModalService,
+    private alertModal: AlertModalService,
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -39,7 +40,7 @@ export class ListReceivedComponent implements OnInit {
           // this.error$.next(true);
           return EMPTY;
         })
-      )
+    )
   }
 
   handleError(){
@@ -72,7 +73,7 @@ export class ListReceivedComponent implements OnInit {
 
   }
 
-  onChangeStatus(): void {
+  onChangeStatus(order: any): void {
     const dialogRef = this.dialog.open(DialogPendingComponent, {
       height: '300px',
       width: '300px',
@@ -80,7 +81,23 @@ export class ListReceivedComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      console.log(result)
+      if(result){
+        const data: any  = {
+          _id: order._id ,
+          status: STATUS.TORECEIVED,
+          salesValue: result.value,
+        }
+        this.ordersService.save(data)
+          .subscribe(
+            // tslint:disable-next-line:no-console
+            ()  => {
+              this.alertModal.showAlertSucess('Order alterada para Recebida com sucesso');
+              this.listAll();
+            },
+            err => console.error('Erro ao cadastrar loja ', err)
+        )
+      }
     })
   }
 

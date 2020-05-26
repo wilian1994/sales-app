@@ -2,13 +2,13 @@
 
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
-
+@import "app/shared/styles/reset.css";
 html,
 body {
-  height: 100%;
+  margin: 0;
 }
 body {
-  margin: 0;
+  /* margin: 0; */
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -28,7 +28,7 @@ td.mat-cell:last-of-type {
 }
 
 .width50 {
-  width: 600px;
+  width: 70%;
 }
 
 .center {

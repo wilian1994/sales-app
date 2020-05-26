@@ -1,85 +1,3 @@
-<!-- <div class="container">
-  <div class="card mt-3">
-    <div class="card-header">
-      <div class="float-left">
-        <h4>Pedidos Aguardando</h4>
-      </div>
-      <div class="float-right">
-        <button
-          type="button"
-          class="btn btn-primary"
-          [routerLink]="['orders/register']"
-        >
-          Novo
-        </button>
-      </div>
-    </div>
-    <div class="card-body">
-      <table class="table table-hover" *ngIf="data$ | async as data">
-        <thead>
-          <th>Produto</th>
-          <th>Nu. Pedido</th>
-          <th>Loja</th>
-          <th>Rastreio</th>
-          <th>Valor Pago</th>
-          <th>Data Compra</th>
-          <th>Acoes</th>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let item of data">
-            <td>{{ item.product.name }}</td>
-            <td>{{ item.order }}</td>
-            <td>{{ item.store.name }}</td>
-            <td>{{ item.tracking }}</td>
-            <td>{{ item.purchase_value }}</td>
-            <td>{{ item.purchase_date | date: "dd/MM/yyyy" }}</td>
-            <td>
-              <span>
-                <button
-                  type="button"
-                  class="btn btn-outline-success"
-                  (click)="onEdit(item._id)"
-                >
-                  <span class="fa fa-check"></span>
-                </button>
-                <button
-                  type="button "
-                  class="btn btn-outline-primary"
-                  (click)="onEdit(item._id)"
-                >
-                  <span class="fa fa-eye"></span>
-                </button>
-                <button
-                  type="button "
-                  class="btn btn-outline-primary"
-                  (click)="onEdit(item._id)"
-                >
-                  <span class="fa fa-pencil"></span>
-                </button>
-                <button
-                  type="button "
-                  class="btn btn-outline-danger"
-                  (click)="onDelete(item._id)"
-                >
-                  <span class="fa fa-trash"></span>
-                </button>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <ng-template #loading>
-        <div *ngIf="error$ | async; else loadingNoError">
-          Erro ao carregar lojas, tente novamente mais tarde!
-        </div>
-        <ng-template #loadingNoError>
-          <span>Carregando Lojas...</span>
-        </ng-template>
-      </ng-template>
-    </div>
-  </div>
-</div> -->
 <div class="container">
   <div class="newer float-right">
     <button
@@ -102,22 +20,17 @@
       <td mat-cell *matCellDef="let element">{{ element.store.name }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="tracking">
-      <th mat-header-cell *matHeaderCellDef>Rastreio</th>
-      <td mat-cell *matCellDef="let element">{{ element.tracking }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="purchaseValue">
-      <th mat-header-cell *matHeaderCellDef>Valor</th>
+    <ng-container matColumnDef="salesValue">
+      <th mat-header-cell *matHeaderCellDef>Valor da Venda</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.purchaseValue | currency: "R$" }}
+        {{ element.salesValue | currency: "R$" }}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="purchaseDate">
-      <th mat-header-cell *matHeaderCellDef>Data</th>
+    <ng-container matColumnDef="lucro">
+      <th mat-header-cell *matHeaderCellDef>Lucro</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.purchaseDate | date: "dd/MM/yyyy" }}
+        {{ element.salesValue - element.purchaseValue | currency: "R$" }}
       </td>
     </ng-container>
 
@@ -148,7 +61,11 @@
         >
           <mat-icon class="action-button">delete</mat-icon>
         </button>
-        <button mat-icon-button aria-label="More" (click)="openDialog()">
+        <button
+          mat-icon-button
+          aria-label="More"
+          (click)="onChangeStatus(element)"
+        >
           <mat-icon class="action-button button-check">check</mat-icon>
         </button>
       </td>

@@ -25,3 +25,7 @@
   padding: 0px 0px;
   padding-right: 20px;
 }
+
+.app-content {
+  min-height: calc(100vh - 110px);
+}

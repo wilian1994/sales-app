@@ -77,8 +77,18 @@ export class ListAwaitingComponent implements OnInit {
   }
 
   onChangeStatus(order: Order): void {
-    const data: any  = {_id: order._id , status: STATUS.RECEIVED}
-    this.ordersService.save(data)
+    this.ordersService.delete(order._id)
+      .subscribe(() => {
+        console.log('removido')
+      },
+      err => console.log('deu erro'));
+    const data: any  = {...order, status : STATUS.RECEIVED}
+    delete data._id;
+    const quantOrder = order.quantity;
+
+    for (let index = 0; index < quantOrder; index++) {
+      data.quantity = 1;
+      this.ordersService.save(data)
       .subscribe(
         // tslint:disable-next-line:no-console
         ()  => {
@@ -87,6 +97,7 @@ export class ListAwaitingComponent implements OnInit {
         },
         err => console.error('Erro ao cadastrar loja ', err)
       )
+    }
   }
 
 }

@@ -3,18 +3,19 @@
   <mat-form-field class="full-width">
     <input
       matInput
-      placeholder="Valor Pago"
-      name="purchaseValue"
+      placeholder="Valor Venda (Unitário)"
+      name="value"
       type="value"
       class="input-purchaseValue"
       currencyMask
+      cdkFocusInitial
       [(ngModel)]="data.value"
     />
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.value" cdkFocusInitial>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data">
     Ok
   </button>
 </div>

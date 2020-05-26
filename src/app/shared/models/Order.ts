@@ -18,4 +18,6 @@ export class Order{
   salesDate: Date;
   salesValue: number;
   investor: string;
+  quantity: number;
+  status: string;
 }

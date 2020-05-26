@@ -20,11 +20,14 @@ import { MarketplacesModule } from './controllers/marketplaces/marketplaces.modu
 import { PaymentTypesModule } from './controllers/paymentTypes/paymentTypes.module';
 import { ProductsModule } from './controllers/products/products.module';
 import { OrdersModule } from './controllers/orders/orders.module';
+
 import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+
 import { MaterialModule } from './material.example.module';
-import { ListReceivedComponent } from './controllers/orders/list-received/list-received.component';
-import { ListPendingComponent } from './controllers/orders/list-pending/list-pending.component';
-import { ListFinalizedComponent } from './controllers/orders/list-finalized/list-finalized.component';
+import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
+import { CustomCurrencyMaskConfig } from './shared/utils/CustomCurrencyMaskConfig';
+
 
 
 registerLocaleData(localePt, 'pt');
@@ -33,9 +36,7 @@ registerLocaleData(localePt, 'pt');
   declarations: [
     AppComponent,
     HeaderComponent,
-    ListReceivedComponent,
-    ListPendingComponent,
-    ListFinalizedComponent,
+    FooterComponent,
   ],
   imports: [
     CategoriesModule,
@@ -54,15 +55,17 @@ registerLocaleData(localePt, 'pt');
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
       }
-  }),
+    }),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    CurrencyMaskModule,
   ],
   providers: [
     {
       provide: LOCALE_ID,
       useValue: 'pt'
-  }
+    },
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

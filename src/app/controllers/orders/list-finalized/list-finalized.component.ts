@@ -6,6 +6,7 @@ import { AlertModalService } from 'src/app/shared/services/alert-modal.service';
 import { EMPTY, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import { STATUS } from 'src/app/shared/models/Status';
 
 @Component({
   selector: 'app-list-finalized',
@@ -31,14 +32,14 @@ export class ListFinalizedComponent implements OnInit {
   }
 
   listAll(){
-    this.data$ = this.ordersService.listAll()
+    this.data$ = this.ordersService.listAllByStatus(STATUS.FINALIZED)
       .pipe(
         catchError((error: any) => {
           this.handleError()
           // this.error$.next(true);
           return EMPTY;
         })
-      )
+    )
   }
 
   handleError(){
