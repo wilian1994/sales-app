@@ -1,3 +1,4 @@
+import { AppModule } from './../../app.module';
 import { ListFinalizedComponent } from './list-finalized/list-finalized.component';
 import { ListPendingComponent } from './list-pending/list-pending.component';
 import { ListReceivedComponent } from 'src/app/controllers/orders/list-received/list-received.component';
@@ -11,6 +12,7 @@ import { OrdersRoutingModule } from './orders.routing.module';
 import { MaterialModule } from 'src/app/material.example.module';
 import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from "ng2-currency-mask";
 import {CustomCurrencyMaskConfig} from '../../shared/utils/CustomCurrencyMaskConfig'
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {CustomCurrencyMaskConfig} from '../../shared/utils/CustomCurrencyMaskCon
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    TranslateModule,
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }

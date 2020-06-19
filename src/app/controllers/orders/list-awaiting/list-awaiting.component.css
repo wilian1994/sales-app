@@ -1,3 +1,39 @@
 .button-check {
   color: green !important;
 }
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
+/*
+.mat-table {
+  overflow: auto;
+  max-height: 400px;
+} */

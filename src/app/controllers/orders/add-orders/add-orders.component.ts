@@ -24,6 +24,7 @@ export class AddOrdersComponent implements OnInit {
   register: FormGroup;
   submitted: boolean = false;
   id: string;
+  quantity: number = 0;
 
   products$:  Product[] = [];
   filteredProducts$:   Observable<Product[]>;
@@ -111,17 +112,19 @@ export class AddOrdersComponent implements OnInit {
     this.submitted = true;
     console.log(this.register.value)
     if(this.register.valid){
-      const data  = this.register.value;
-      console.log('call valid')
-      this.ordersService.save(data)
-      .subscribe(
-        // tslint:disable-next-line:no-console
-        ()  => {
-          this.alertModal.showAlertSucess('Loja salvo/editado com sucesso');
-          this.location.back();
-        },
-        err => console.error('Erro ao cadastrar loja ', err)
-      )
+      let data:any  = this.register.value;
+      for (let index = 0; index < this.quantity; index++) {
+        data.quantity = 1;
+        this.ordersService.save(data)
+        .subscribe(
+          // tslint:disable-next-line:no-console
+          ()  => {
+            this.alertModal.showAlertSucess('Loja salvo/editado com sucesso');
+          },
+          err => console.error('Erro ao cadastrar loja ', err)
+        )
+      }
+      this.location.back();
     }
   }
 

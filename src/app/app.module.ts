@@ -60,6 +60,9 @@ registerLocaleData(localePt, 'pt');
     MaterialModule,
     CurrencyMaskModule,
   ],
+  exports: [
+    TranslateModule,
+  ],
   providers: [
     {
       provide: LOCALE_ID,

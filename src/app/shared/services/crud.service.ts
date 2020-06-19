@@ -38,4 +38,8 @@ export class CrudService<T> {
     }
     return this.create(record);
   }
+
+  listBySearch(config: any): Observable<T[]> {
+    return this.httpClient.get<T[]>(this.API_URL, {params: config});
+  }
 }
