@@ -11,7 +11,6 @@ import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/m
 import { STATUS } from 'src/app/shared/models/Status';
 
 
-
 @Component({
   selector: 'app-list-awaiting',
   templateUrl: './list-awaiting.component.html',
