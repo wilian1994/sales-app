@@ -2,15 +2,14 @@
   "category": {
     "name": "Categorias"
   },
-
   "order": {
     "name": "Nome",
     "store": "Loja",
     "tracking": "Rastreio",
     "value": "Valor",
-    "purchaseDate": "Data da Compra"
+    "purchaseDate": "Data da Compra",
+    "quantity": "Quantidade"
   },
-
   "default": {
     "add": "Adicionar",
     "search": "Pesquisar",

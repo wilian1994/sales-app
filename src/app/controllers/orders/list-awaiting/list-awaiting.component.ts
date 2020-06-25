@@ -19,7 +19,7 @@ import { STATUS } from 'src/app/shared/models/Status';
 export class ListAwaitingComponent implements OnInit {
 
   public data$ = new MatTableDataSource<Order>();
-  displayedColumns = ['name', 'store', 'tracking', 'purchaseValue', 'actions'];
+  displayedColumns = ['name', 'store', 'tracking', 'purchaseValue', 'quantity', 'actions'];
   error$ = new Subject<boolean>();
   search: Subject<string> = new Subject<string>();
   searching: string = "";
@@ -113,28 +113,11 @@ export class ListAwaitingComponent implements OnInit {
   }
 
   onChangeStatus(order: Order): void {
-    this.ordersService.delete(order._id)
+
+    this.ordersService.orderConfirmed(order)
       .subscribe(() => {
-        console.log('removido')
-      },
-        err => console.log('deu erro'));
-    const data: any = { ...order, status: STATUS.RECEIVED }
-    delete data._id;
-    const quantOrder = order.quantity;
-
-    for (let index = 0; index < quantOrder; index++) {
-      data.quantity = 1;
-      this.ordersService.save(data)
-        .subscribe(
-          // tslint:disable-next-line:no-console
-          () => {
-            this.alertModal.showAlertSucess('Order alterada para Recebida com sucesso');
-
-          },
-          err => console.error('Erro ao cadastrar loja ', err)
-        )
-    }
-    this.listAll();
+        this.listAll();
+      })
   }
 
   onSearch(event) {

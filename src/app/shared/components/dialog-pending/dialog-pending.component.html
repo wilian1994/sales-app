@@ -1,17 +1,11 @@
 <h1 mat-dialog-title>Eba! O produto foi vendido</h1>
 <div mat-dialog-content>
   <mat-form-field class="full-width">
-    <input
-      matInput
-      placeholder="Valor Venda (Unitário)"
-      name="value"
-      type="value"
-      class="input-purchaseValue"
-      currencyMask
-      cdkFocusInitial
-      [(ngModel)]="data.value"
-    />
+    <input matInput placeholder="Valor Venda (Unitário)" name="value" type="value" class="input-purchaseValue"
+      currencyMask cdkFocusInitial [(ngModel)]="data.value" />
   </mat-form-field>
+
+
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>

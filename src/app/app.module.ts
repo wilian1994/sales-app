@@ -27,6 +27,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { MaterialModule } from './material.example.module';
 import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import { CustomCurrencyMaskConfig } from './shared/utils/CustomCurrencyMaskConfig';
+import { SalesComponent } from './controllers/sales/sales.component';
 
 
 
@@ -37,6 +38,7 @@ registerLocaleData(localePt, 'pt');
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    SalesComponent,
   ],
   imports: [
     CategoriesModule,

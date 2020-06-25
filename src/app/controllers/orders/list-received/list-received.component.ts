@@ -8,6 +8,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { STATUS } from 'src/app/shared/models/Status';
 import { DialogPendingComponent } from 'src/app/shared/components/dialog-pending/dialog-pending.component';
+import { Product } from 'src/app/shared/models/Product';
+import { ProductsService } from '../../products/products.service';
+import { SalesService } from '../../sales/sales.service';
 
 @Component({
   selector: 'app-list-received',
@@ -16,11 +19,12 @@ import { DialogPendingComponent } from 'src/app/shared/components/dialog-pending
 })
 export class ListReceivedComponent implements OnInit {
   data$: any;
-  displayedColumns = ['name', 'store', 'tracking', 'purchaseValue', 'actions'];
+  displayedColumns = ['name', 'price', 'quantity', 'actions'];
   error$ = new Subject<boolean>();
 
   constructor(
-    private ordersService: OrdersService,
+    private productService: ProductsService,
+    private saleService: SalesService,
     private alertService: AlertModalService,
     private alertModal: AlertModalService,
     private router: Router,
@@ -32,37 +36,37 @@ export class ListReceivedComponent implements OnInit {
     this.listAll();
   }
 
-  listAll(){
-    this.data$ = this.ordersService.listAllByStatus(STATUS.RECEIVED)
+  listAll() {
+    this.data$ = this.productService.listAll()
       .pipe(
         catchError((error: any) => {
           this.handleError()
           // this.error$.next(true);
           return EMPTY;
         })
-    )
+      )
   }
 
-  handleError(){
+  handleError() {
     this.alertService.showAlertDanger('Erro ao carregar pedidos. Tente novamentes  mais tarde!');
   }
 
-  onEdit(id: string){
-    this.router.navigate(['edit', id], {relativeTo: this.route});
+  onEdit(id: string) {
+    this.router.navigate(['edit', id], { relativeTo: this.route });
   }
 
-  onDelete(id: string){
-    const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja removar este registro', 'Não', 'Sim');
-    result$.asObservable()
-    .pipe(
-      take(1),
-      switchMap(result => result ? this.ordersService.delete(id) : EMPTY)
-    )
-    .subscribe(
-      () => this.listAll(),
-      (err)  => alert('ERRO ao remover o pedido')
-    )
-  }
+  // onDelete(id: string) {
+  //   const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja removar este registro', 'Não', 'Sim');
+  //   result$.asObservable()
+  //     .pipe(
+  //       take(1),
+  //       switchMap(result => result ? this.ordersService.delete(id) : EMPTY)
+  //     )
+  //     .subscribe(
+  //       () => this.listAll(),
+  //       (err) => alert('ERRO ao remover o pedido')
+  //     )
+  // }
 
   openDialog(): void {
     this.dialog.open(DialogModalComponent, {
@@ -73,7 +77,7 @@ export class ListReceivedComponent implements OnInit {
 
   }
 
-  onChangeStatus(order: any): void {
+  onChangeStatus(product: any): void {
     const dialogRef = this.dialog.open(DialogPendingComponent, {
       height: '300px',
       width: '300px',
@@ -82,21 +86,24 @@ export class ListReceivedComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
-      if(result){
-        const data: any  = {
-          _id: order._id ,
-          status: STATUS.TORECEIVED,
+      if (result) {
+        const data: any = {
+          product: product._id,
           salesValue: result.value,
+          salesMan: "Wilian",
+          orderCode: "44444",
+          quantity: 1
+
         }
-        this.ordersService.save(data)
+        this.saleService.save(data)
           .subscribe(
             // tslint:disable-next-line:no-console
-            ()  => {
+            () => {
               this.alertModal.showAlertSucess('Order alterada para Recebida com sucesso');
               this.listAll();
             },
             err => console.error('Erro ao cadastrar loja ', err)
-        )
+          )
       }
     })
   }
