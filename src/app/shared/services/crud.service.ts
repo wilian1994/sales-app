@@ -35,6 +35,14 @@ export class CrudService<T> {
       );
   }
 
+  completedSale(record: T) {
+    return this.httpClient.post<T[]>(`${this.API_URL}/completed`, record)
+      .pipe(
+        // delay(2000),
+      );
+  }
+
+
   private edit(record: T): Observable<T> {
     return this.httpClient.put<T>(this.API_URL, record).pipe(take(1));
   }

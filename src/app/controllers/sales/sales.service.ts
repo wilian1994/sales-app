@@ -17,4 +17,11 @@ export class SalesService extends CrudService<Sale> {
   constructor(protected httpClient: HttpClient) {
     super(httpClient, `${environment.API}sales`);
   }
+
+  listAllByStatus(status: any) {
+    return this.httpClient.get<Sale[]>(`${environment.API}sales/status/${status}`)
+      .pipe(
+        // delay(2000),
+      );
+  }
 }

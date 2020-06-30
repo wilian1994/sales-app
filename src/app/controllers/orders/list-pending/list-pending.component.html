@@ -15,11 +15,6 @@
       <td mat-cell *matCellDef="let element">{{ element.product.name }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="store">
-      <th mat-header-cell *matHeaderCellDef>Loja</th>
-      <td mat-cell *matCellDef="let element">{{ element.store.name }}</td>
-    </ng-container>
-
     <ng-container matColumnDef="salesValue">
       <th mat-header-cell *matHeaderCellDef>Valor da Venda</th>
       <td mat-cell *matCellDef="let element">
@@ -30,7 +25,11 @@
     <ng-container matColumnDef="lucro">
       <th mat-header-cell *matHeaderCellDef>Lucro</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.salesValue - element.purchaseValue | currency: "R$" }}
+        {{
+          element.totalSales -
+            element.totalPrice.price -
+            (element.freight ? element.freight : 0) | currency: "R$"
+        }}
       </td>
     </ng-container>
 

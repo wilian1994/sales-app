@@ -1,7 +1,4 @@
-<mat-sidenav-container
-  class="sidenav-container"
-  (backdropClick)="sidenav.toggle()"
->
+<mat-sidenav-container class="sidenav-container" (backdropClick)="sidenav.toggle()">
   <mat-sidenav #sidenav class="sidenav" mode="over">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list (click)="sidenav.toggle()">
@@ -17,37 +14,18 @@
         <div class="menu-text">Lojas</div>
       </a>
       <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="['/products']">
+      <a mat-list-item [routerLink]="['/orders/received']">
         <mat-icon aria-label="Side nav toggle icon">headset</mat-icon>
         <div class="menu-text">Produtos</div>
       </a>
+      <a mat-list-item [routerLink]="['/orders/awaiting']">
+        <mat-icon aria-label="Side nav toggle icon">list_alt</mat-icon>
+        <div class="menu-text">Pedidos</div>
+      </a>
       <mat-divider></mat-divider>
       <mat-divider></mat-divider>
-      <mat-expansion-panel
-        (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false"
-        (click)="sidenav.toggle()"
-      >
-        <mat-expansion-panel-header class="expansion-menu">
-          <a mat-list-item>
-            <mat-icon aria-label="Side nav toggle icon">list_alt</mat-icon>
-            <div class="menu-text">Pedidos</div>
-          </a>
-        </mat-expansion-panel-header>
-        <a mat-list-item [routerLink]="['/orders/awaiting']">
-          <mat-icon aria-label="Side nav toggle icon">hourglass_empty</mat-icon>
-          <div class="menu-text">Aguardando</div>
-        </a>
-        <a mat-list-item [routerLink]="['/orders/received']">
-          <mat-icon aria-label="Side nav toggle icon">where_to_vote</mat-icon>
-          <div class="menu-text">Recebidos</div>
-        </a>
-      </mat-expansion-panel>
-      <mat-expansion-panel
-        (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false"
-        (click)="sidenav.toggle()"
-      >
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+        (click)="sidenav.toggle()">
         <mat-expansion-panel-header class="expansion-menu">
           <a mat-list-item>
             <mat-icon aria-label="Side nav toggle icon">
@@ -70,12 +48,7 @@
 
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="header-toolbar">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="sidenav.toggle()"
-      >
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>GCM SOLUÇÕES</span>

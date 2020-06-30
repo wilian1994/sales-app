@@ -1,11 +1,53 @@
 <h1 mat-dialog-title>Eba! O produto foi vendido</h1>
 <div mat-dialog-content>
   <mat-form-field class="full-width">
-    <input matInput placeholder="Valor Venda (Unitário)" name="value" type="value" class="input-purchaseValue"
-      currencyMask cdkFocusInitial [(ngModel)]="data.value" />
+    <input
+      matInput
+      placeholder="Valor Total da Venda"
+      name="value"
+      type="value"
+      class="input-purchaseValue"
+      currencyMask
+      cdkFocusInitial
+      [(ngModel)]="data.totalSales"
+    />
   </mat-form-field>
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      placeholder="Quantidade"
+      name="quantity"
+      type="number"
+      class="input-quantity"
+      [(ngModel)]="data.quantity"
+    />
+  </mat-form-field>
+  <label id="example-radio-group-label" class="full-width">Houve Frete?</label>
 
-
+  <mat-radio-group [(ngModel)]="freight">
+    <mat-radio-button [value]="true">Sim</mat-radio-button>
+    <mat-radio-button [value]="false">Não</mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field class="full-width" *ngIf="freight">
+    <input
+      matInput
+      placeholder="Valor do frete"
+      name="freight"
+      type="freight"
+      class="input-freight"
+      currencyMask
+      cdkFocusInitial
+      [(ngModel)]="data.freight"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Marketplace</mat-label>
+    <mat-select [(ngModel)]="data.marketplace">
+      <mat-option *ngFor="let market of marketplace$" [value]="market._id">
+        {{ market.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>

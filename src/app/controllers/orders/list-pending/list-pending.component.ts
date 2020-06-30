@@ -8,6 +8,8 @@ import { EMPTY, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { STATUS } from 'src/app/shared/models/Status';
+import { SalesService } from '../../sales/sales.service';
+import { Sale } from 'src/app/shared/models/Sale';
 
 @Component({
   selector: 'app-list-pending',
@@ -17,11 +19,12 @@ import { STATUS } from 'src/app/shared/models/Status';
 export class ListPendingComponent implements OnInit {
 
   data$: any;
-  displayedColumns = ['name', 'store', 'salesValue', 'lucro', 'actions'];
+  displayedColumns = ['name', 'salesValue', 'lucro', 'actions'];
   error$ = new Subject<boolean>();
 
   constructor(
     private ordersService: OrdersService,
+    private salesService: SalesService,
     private alertService: AlertModalService,
     private alertModal: AlertModalService,
     private router: Router,
@@ -34,36 +37,36 @@ export class ListPendingComponent implements OnInit {
     this.listAll();
   }
 
-  listAll(){
-    this.data$ = this.ordersService.listAllByStatus(STATUS.TORECEIVED)
+  listAll() {
+    this.data$ = this.salesService.listAllByStatus(STATUS.TORECEIVED)
       .pipe(
         catchError((error: any) => {
           this.handleError()
           // this.error$.next(true);
           return EMPTY;
         })
-    )
+      )
   }
 
-  handleError(){
+  handleError() {
     this.alertService.showAlertDanger('Erro ao carregar pedidos. Tente novamentes  mais tarde!');
   }
 
-  onEdit(id: string){
-    this.router.navigate(['edit', id], {relativeTo: this.route});
+  onEdit(id: string) {
+    this.router.navigate(['edit', id], { relativeTo: this.route });
   }
 
-  onDelete(id: string){
+  onDelete(id: string) {
     const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja removar este registro', 'Não', 'Sim');
     result$.asObservable()
-    .pipe(
-      take(1),
-      switchMap(result => result ? this.ordersService.delete(id) : EMPTY)
-    )
-    .subscribe(
-      () => this.listAll(),
-      (err)  => alert('ERRO ao remover o pedido')
-    )
+      .pipe(
+        take(1),
+        switchMap(result => result ? this.ordersService.delete(id) : EMPTY)
+      )
+      .subscribe(
+        () => this.listAll(),
+        (err) => alert('ERRO ao remover o pedido')
+      )
   }
 
   openDialog(): void {
@@ -75,12 +78,13 @@ export class ListPendingComponent implements OnInit {
 
   }
 
-  onChangeStatus(order: Order): void {
-    const data: any  = {_id: order._id , status: STATUS.FINALIZED}
-    this.ordersService.save(data)
+  onChangeStatus(sale: Sale): void {
+    sale.status = STATUS.FINALIZED;
+    console.log('onChangeStatus', sale);
+    this.salesService.completedSale(sale)
       .subscribe(
         // tslint:disable-next-line:no-console
-        ()  => {
+        () => {
           this.alertModal.showAlertSucess('Order alterada para Recebida com sucesso');
           this.listAll();
         },
