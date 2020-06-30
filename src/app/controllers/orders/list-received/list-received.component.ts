@@ -1,4 +1,4 @@
-import { switchMap, take, catchError } from "rxjs/operators";
+import { switchMap, take, catchError, map, tap } from "rxjs/operators";
 import { Component, OnInit } from "@angular/core";
 import { EMPTY, Subject } from "rxjs";
 import { DialogModalComponent } from "src/app/shared/components/dialog-modal/dialog-modal.component";
@@ -35,10 +35,12 @@ export class ListReceivedComponent implements OnInit {
 
   ngOnInit() {
     this.listAll();
+    console.log(this.data$);
   }
 
   listAll() {
     this.data$ = this.productService.listAll().pipe(
+      tap(element => console.log("elemento", element)),
       catchError((error: any) => {
         this.handleError();
         // this.error$.next(true);
@@ -113,12 +115,5 @@ export class ListReceivedComponent implements OnInit {
         );
       }
     });
-  }
-
-  getCalculateDate(date: Date) {
-    let now = moment();
-    let dateSale = moment(new Date(date).getTime());
-    console.log(now.diff(dateSale, "days"));
-    return date;
   }
 }
