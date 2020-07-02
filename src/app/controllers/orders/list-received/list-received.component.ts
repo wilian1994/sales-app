@@ -20,7 +20,14 @@ import * as moment from "moment";
 })
 export class ListReceivedComponent implements OnInit {
   data$: any;
-  displayedColumns = ["name", "price", "quantity", "days", "actions"];
+  displayedColumns = [
+    "name",
+    "price",
+    "quantity",
+    "days",
+    "suggestedValue",
+    "actions"
+  ];
   error$ = new Subject<boolean>();
 
   constructor(
@@ -57,6 +64,19 @@ export class ListReceivedComponent implements OnInit {
 
   onEdit(id: string) {
     this.router.navigate(["edit", id], { relativeTo: this.route });
+  }
+
+  onUpdate(product: any) {
+    console.log(product);
+    product.lastValue = product.finalValue;
+    this.productService.save(product).subscribe(
+      // tslint:disable-next-line:no-console
+      () => {
+        this.alertModal.showAlertSucess("Produto alterado com sucesso");
+        this.listAll();
+      },
+      err => console.error("Erro ao cadastrar loja ", err)
+    );
   }
 
   // onDelete(id: string) {
