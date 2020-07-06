@@ -46,6 +46,7 @@ export class ListReceivedComponent implements OnInit {
   }
 
   listAll() {
+    console.log("init listall");
     this.data$ = this.productService.listAll().pipe(
       tap(element => console.log("elemento", element)),
       catchError((error: any) => {
