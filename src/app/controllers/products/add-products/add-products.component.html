@@ -27,6 +27,36 @@
       </select>
     </div>
 
+    <app-input-field
+      [classCss]="submitted && hasError('quantity')"
+      id="quantity"
+      label="Quantidade"
+      [control]="register.get('quantity')"
+      controlName="quantity"
+      [formGroup]="register"
+    ></app-input-field>
+
+    <app-input-field
+      [classCss]="submitted && hasError('price')"
+      id="price"
+      label="Valor Pago"
+      [control]="register.get('[price]')"
+      controlName="price"
+      [formGroup]="register"
+    ></app-input-field>
+    <mat-form-field class="full-width">
+      <mat-label>última venda</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        (focus)="picker.open()"
+        f
+        formControlName="lastedSale"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
     <button type="submit" class="btn btn-primary">Salvar</button>
     <button (click)="onCancel()" class="btn btn-default">Cancelar</button>
   </form>
