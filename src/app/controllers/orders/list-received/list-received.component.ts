@@ -1,17 +1,23 @@
 import { switchMap, take, catchError, map, tap } from "rxjs/operators";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { EMPTY, Subject } from "rxjs";
 import { DialogModalComponent } from "src/app/shared/components/dialog-modal/dialog-modal.component";
 import { OrdersService } from "../orders.service";
 import { AlertModalService } from "src/app/shared/services/alert-modal.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { MatDialog } from "@angular/material";
+import {
+  MatDialog,
+  MatPaginator,
+  MatSort,
+  MatTableDataSource
+} from "@angular/material";
 import { STATUS } from "src/app/shared/models/Status";
 import { DialogPendingComponent } from "src/app/shared/components/dialog-pending/dialog-pending.component";
 import { Product } from "src/app/shared/models/Product";
 import { ProductsService } from "../../products/products.service";
 import { SalesService } from "../../sales/sales.service";
 import * as moment from "moment";
+import { element } from "protractor";
 
 @Component({
   selector: "app-list-received",
@@ -19,7 +25,7 @@ import * as moment from "moment";
   styleUrls: ["./list-received.component.css"]
 })
 export class ListReceivedComponent implements OnInit {
-  data$: any;
+  public data$ = new MatTableDataSource<any>();
   displayedColumns = [
     "name",
     "price",
@@ -29,6 +35,12 @@ export class ListReceivedComponent implements OnInit {
     "actions"
   ];
   error$ = new Subject<boolean>();
+  totalSize = 0;
+  pageIndex = 0;
+  pageSize = 5;
+
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, null) sort: MatSort;
 
   constructor(
     private productService: ProductsService,
@@ -45,16 +57,27 @@ export class ListReceivedComponent implements OnInit {
     console.log(this.data$);
   }
 
+  ngAfterViewInit(): void {
+    console.log("this sort", this.sort);
+    this.data$.sort = this.sort;
+    this.data$.paginator = this.paginator;
+  }
+
   listAll() {
     console.log("init listall");
-    this.data$ = this.productService.listAll().pipe(
-      tap(element => console.log("elemento", element)),
-      catchError((error: any) => {
-        this.handleError();
-        // this.error$.next(true);
-        return EMPTY;
-      })
-    );
+    this.productService
+      .listAll()
+      .pipe(
+        tap(element => console.log("elemento", element)),
+        catchError((error: any) => {
+          this.handleError();
+          // this.error$.next(true);
+          return EMPTY;
+        })
+      )
+      .subscribe(data => {
+        this.data$.data = data;
+      });
   }
 
   handleError() {
@@ -65,6 +88,10 @@ export class ListReceivedComponent implements OnInit {
 
   onEdit(id: string) {
     this.router.navigate(["edit", id], { relativeTo: this.route });
+  }
+
+  onSearch(value: string) {
+    this.data$.filter = value.trim().toLocaleLowerCase();
   }
 
   onUpdate(product: any) {

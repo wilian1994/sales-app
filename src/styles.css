@@ -72,14 +72,30 @@ td.mat-column-position {
   border-left: 1px solid #e0e0e0;
 }
 
-.action {
-  width: 161px;
-}
-
 .newer {
   margin-bottom: 13px;
 }
 
 .attetion-colum {
   background-color: #f08080;
+}
+
+align-left {
+  text-align: left !important;
+}
+
+.w-75 {
+  width: 75px;
+}
+
+.w-50 {
+  width: 50px;
+}
+
+.w-100 {
+  width: 100px;
+}
+
+.w-200 {
+  width: 200px;
 }
