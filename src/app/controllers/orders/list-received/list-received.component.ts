@@ -38,6 +38,7 @@ export class ListReceivedComponent implements OnInit {
   totalSize = 0;
   pageIndex = 0;
   pageSize = 5;
+  product: any;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, null) sort: MatSort;
@@ -105,6 +106,11 @@ export class ListReceivedComponent implements OnInit {
       },
       err => console.error("Erro ao cadastrar loja ", err)
     );
+  }
+
+  onChangeProduct(product) {
+    console.log(product);
+    this.product = product;
   }
 
   // onDelete(id: string) {
