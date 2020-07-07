@@ -15,6 +15,9 @@
         "search": "Pesquisar",
         "action": "Ações",
         "name": "Nome",
-        "store": "Loja"
+        "store": "Loja",
+        "saleDay": "Dias Venda",
+        "value": "Valor",
+        "suggestedValue": "Valor Sugerido"
     }
 }
