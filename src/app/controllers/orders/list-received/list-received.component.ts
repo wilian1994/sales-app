@@ -102,6 +102,7 @@ export class ListReceivedComponent implements OnInit {
   }
 
   onChangeStatus(product: any): void {
+    console.log(product);
     const dialogRef = this.dialog.open(DialogPendingComponent, {
       height: "500px",
       width: "300px",
@@ -121,6 +122,7 @@ export class ListReceivedComponent implements OnInit {
           totalPriceProduct,
           salesValue: result.totalSales / result.quantity,
           grossAmount: result.totalSales - totalPriceProduct - freight,
+          days: product.days,
           status: STATUS.TORECEIVED,
           ...result
         };

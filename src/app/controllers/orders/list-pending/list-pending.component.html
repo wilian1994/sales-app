@@ -25,11 +25,7 @@
     <ng-container matColumnDef="lucro">
       <th mat-header-cell *matHeaderCellDef>Lucro</th>
       <td mat-cell *matCellDef="let element">
-        {{
-          element.totalSales -
-            element.totalPrice.price -
-            (element.freight ? element.freight : 0) | currency: "R$"
-        }}
+        {{ element.grossAmount | currency: "R$" }}
       </td>
     </ng-container>
 
