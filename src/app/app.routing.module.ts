@@ -1,38 +1,59 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { GraphsComponent } from "./shared/components/graphs/graphs.component";
 
 const routes: Routes = [
+  {
+    path: "initial",
+    component: GraphsComponent
+  },
 
   {
-    path: 'stores',
-    loadChildren: () => import('./controllers/stores/stores.module').then(m => m.StoresModule),
+    path: "",
+    component: GraphsComponent
   },
   {
-    path: 'categories',
-    loadChildren: () => import('./controllers/categories/categories.module').then(m => m.CategoriesModule),
+    path: "stores",
+    loadChildren: () =>
+      import("./controllers/stores/stores.module").then(m => m.StoresModule)
   },
   {
-    path: 'marketplaces',
-    loadChildren: () => import('./controllers/marketplaces/marketplaces.module').then(m => m.MarketplacesModule),
+    path: "categories",
+    loadChildren: () =>
+      import("./controllers/categories/categories.module").then(
+        m => m.CategoriesModule
+      )
   },
   {
-    path: 'paymentTypes',
-    loadChildren: () => import('./controllers/paymentTypes/paymentTypes.module').then(m => m.PaymentTypesModule),
+    path: "marketplaces",
+    loadChildren: () =>
+      import("./controllers/marketplaces/marketplaces.module").then(
+        m => m.MarketplacesModule
+      )
   },
   {
-    path: 'products',
-    loadChildren: () => import('./controllers/products/products.module').then(m => m.ProductsModule),
+    path: "paymentTypes",
+    loadChildren: () =>
+      import("./controllers/paymentTypes/paymentTypes.module").then(
+        m => m.PaymentTypesModule
+      )
   },
   {
-    path: 'orders',
-    loadChildren: () => import('./controllers/orders/orders.module').then(m => m.OrdersModule),
+    path: "products",
+    loadChildren: () =>
+      import("./controllers/products/products.module").then(
+        m => m.ProductsModule
+      )
+  },
+  {
+    path: "orders",
+    loadChildren: () =>
+      import("./controllers/orders/orders.module").then(m => m.OrdersModule)
   }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -11,7 +11,43 @@
     </mat-form-field>
   </div>
   <div class="example-container mat-elevation-z8">
-    <table mat-table [dataSource]="data$" matSort>
+    <div class="button-all">
+      <button mat-menu-item *ngIf="sale" (click)="onUpdateAll(data)">
+        <mat-icon class="action-button" color="primary">update</mat-icon>
+        <span>Atualzar Valores</span>
+      </button>
+    </div>
+    <div class="button-all">
+      <button mat-menu-item aria-label="Delete" (click)="onDelete(row._id)">
+        <mat-icon class="action-button" color="warn">delete</mat-icon>
+        <span>Excluir</span>
+      </button>
+    </div>
+    <table
+      mat-table
+      [dataSource]="data$"
+      matSort
+      [matSortActive]="sortActive"
+      matSortDirection="asc"
+    >
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            color="primary"
+            (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+          ></mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            color="primary"
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+          ></mat-checkbox>
+        </td>
+      </ng-container>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">
           {{ "default.name" | translate }}
@@ -130,7 +166,7 @@
     </table>
     <mat-paginator
       #paginator
-      [pageSize]="pageSize"
+      ([pageSize])="(pageSize)"
       [pageIndex]="pageIndex"
       [pageSizeOptions]="[5, 10]"
       [length]="totalSize"
@@ -173,6 +209,16 @@
       >
         <mat-icon class="action-button button-check">local_atm</mat-icon>
         <span>Realizar Venda</span>
+      </button>
+      <button
+        mat-menu-item
+        *ngIf="sale"
+        color="primary"
+        aria-label="Atualizar"
+        (click)="onUpdate(data)"
+      >
+        <mat-icon class="action-button" color="primary">update</mat-icon>
+        <span>Atualzar Valores</span>
       </button>
       <button
         *ngIf="receipt"

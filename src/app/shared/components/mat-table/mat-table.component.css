@@ -1,0 +1,9 @@
+.mat-column-select {
+  padding-top: 8px;
+}
+
+.button-all {
+  width: auto;
+  margin-left: 15px;
+  display: inline-block !important;
+}

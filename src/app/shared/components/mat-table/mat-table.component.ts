@@ -14,6 +14,7 @@ import { EMPTY } from "rxjs";
 import { STATUS } from "../../models/Status";
 import { DialogModalComponent } from "../dialog-modal/dialog-modal.component";
 import { DialogPendingComponent } from "../dialog-pending/dialog-pending.component";
+import { SelectionModel } from "@angular/cdk/collections";
 
 @Component({
   selector: "app-mat-table",
@@ -23,16 +24,20 @@ import { DialogPendingComponent } from "../dialog-pending/dialog-pending.compone
 export class MatTableComponent implements OnInit {
   @Input() link: string;
   @Input() service: any;
-  @Input() displayedColumns: string;
+  @Input() displayedColumns: string[];
   @Input() receipt: boolean = false;
   @Input() sale: boolean = false;
+  @Input() sortActive: string = "update";
+
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, null) sort: MatSort;
+
   totalSize = 0;
   pageIndex = 0;
   pageSize = 5;
   product: any;
   data$ = new MatTableDataSource<any>();
+  selection = new SelectionModel<Product>(true, []);
 
   constructor(
     private router: Router,
@@ -43,8 +48,7 @@ export class MatTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("displayedColumns", this.displayedColumns);
-    console.log("link", this.link);
+    this.displayedColumns.unshift("select");
     this.listAll();
   }
 
@@ -141,5 +145,22 @@ export class MatTableComponent implements OnInit {
         );
       }
     });
+  }
+
+  onUpdateAll() {
+    let teste = this.selection.selected.slice(0, this.paginator.pageSize);
+  }
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.data$.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.data$.data.forEach(row => this.selection.select(row));
   }
 }

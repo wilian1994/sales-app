@@ -1,0 +1,50 @@
+canvas {
+  display: inline-block !important;
+}
+.canvas-01 {
+  /* padding-left: 35px; */
+  /* padding-top: 35px; */
+  height: 30vh;
+  width: 33%;
+  display: inline-block;
+  /* width: 50vw; */
+}
+
+.canvas-02 {
+  /* padding-left: 35px; */
+  /* padding-top: 35px; */
+  height: 30vh;
+  width: 33%;
+  /* width: 50vw; */
+  float: right;
+}
+
+.canvas-03 {
+  /* padding-left: 35px; */
+  /* padding-top: 35px; */
+  height: 20vh;
+  display: inline-block;
+  /* width: 50vw; */
+  width: 16.5%;
+}
+
+.canvas-100 {
+  width: 66%;
+  height: 20vh;
+  float: right;
+}
+
+.card-title {
+  text-align: center;
+  color: gray;
+}
+.card-content {
+  color: green;
+  text-align: center;
+  font-size: 20px;
+}
+
+mat-card {
+  margin: 20px;
+  margin-top: 40px;
+}

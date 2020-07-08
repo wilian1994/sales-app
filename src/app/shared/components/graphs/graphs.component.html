@@ -1,0 +1,39 @@
+<div class="canvas-01">
+  <mat-card>
+    <canvas #myCanvas></canvas>
+  </mat-card>
+</div>
+
+<div class="canvas-02">
+  <mat-card>
+    <canvas #profit></canvas>
+  </mat-card>
+</div>
+<div class="canvas-02">
+  <mat-card>
+    <canvas #sales></canvas>
+  </mat-card>
+</div>
+<div class="canvas-03">
+  <mat-card>
+    <mat-card-title class="card-title">Lucro do Mês</mat-card-title>
+    <mat-card-content class="card-content">
+      {{ salesMonth.total | currency: "R$" }}
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="canvas-03">
+  <mat-card>
+    <mat-card-title class="card-title">Vendas</mat-card-title>
+    <mat-card-content class="card-content">
+      {{ salesMonth.quantities }}
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="canvas-100">
+  <mat-card>
+    <canvas #products height="60"></canvas>
+  </mat-card>
+</div>

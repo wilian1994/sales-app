@@ -28,6 +28,7 @@ import { MaterialModule } from "./material.example.module";
 import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from "ng2-currency-mask";
 import { CustomCurrencyMaskConfig } from "./shared/utils/CustomCurrencyMaskConfig";
 import { SalesComponent } from "./controllers/sales/sales.component";
+import { GraphsComponent } from "./shared/components/graphs/graphs.component";
 
 registerLocaleData(localePt, "pt");
 
@@ -35,6 +36,7 @@ registerLocaleData(localePt, "pt");
   declarations: [
     AppComponent,
     HeaderComponent,
+    GraphsComponent,
     FooterComponent,
     SalesComponent
   ],

@@ -15,6 +15,7 @@ import { DialogModalComponent } from "./components/dialog-modal/dialog-modal.com
 import { DialogPendingComponent } from "./components/dialog-pending/dialog-pending.component";
 import { MatTableComponent } from "./components/mat-table/mat-table.component";
 import { TranslateModule } from "@ngx-translate/core";
+import { GraphsComponent } from "./components/graphs/graphs.component";
 
 @NgModule({
   declarations: [
