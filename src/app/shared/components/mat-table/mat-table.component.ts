@@ -15,6 +15,7 @@ import { STATUS } from "../../models/Status";
 import { DialogModalComponent } from "../dialog-modal/dialog-modal.component";
 import { DialogPendingComponent } from "../dialog-pending/dialog-pending.component";
 import { SelectionModel } from "@angular/cdk/collections";
+import { AuthenticationService } from "../../services/authentication.service";
 
 @Component({
   selector: "app-mat-table",
@@ -44,10 +45,12 @@ export class MatTableComponent implements OnInit {
     private saleService: SalesService,
     private alertService: AlertModalService,
     private alertModal: AlertModalService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public authentication: AuthenticationService
   ) {}
 
   ngOnInit() {
+    console.log("AUTENTICATION", this.authentication.currentUserValue);
     this.displayedColumns.unshift("select");
     this.listAll();
   }

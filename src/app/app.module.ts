@@ -29,6 +29,8 @@ import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from "ng2-currency-mask";
 import { CustomCurrencyMaskConfig } from "./shared/utils/CustomCurrencyMaskConfig";
 import { SalesComponent } from "./controllers/sales/sales.component";
 import { GraphsComponent } from "./shared/components/graphs/graphs.component";
+import { LoginComponent } from "./controllers/login/login.component";
+import { LoginModule } from "./controllers/login/login.module";
 
 registerLocaleData(localePt, "pt");
 
@@ -46,6 +48,7 @@ registerLocaleData(localePt, "pt");
     MarketplacesModule,
     PaymentTypesModule,
     ProductsModule,
+    LoginModule,
     OrdersModule,
     BrowserModule,
     AppRoutingModule,

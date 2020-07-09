@@ -1,0 +1,41 @@
+<mat-card class="login-class">
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+    <form
+      autocomplete="off"
+      novalidate
+      [formGroup]="loginForm"
+      *ngIf="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <p>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Username"
+            formControlName="username"
+          />
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input
+            type="password"
+            matInput
+            placeholder="Password"
+            formControlName="password"
+          />
+        </mat-form-field>
+      </p>
+
+      <p *ngIf="error" class="error">
+        Credenciais inválidas
+      </p>
+      <div class="button">
+        <button type="submit" color="primary" mat-raised-button>Salvar</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
