@@ -10,6 +10,7 @@ import { MatDialog } from "@angular/material";
 import { STATUS } from "src/app/shared/models/Status";
 import { SalesService } from "../../sales/sales.service";
 import { Sale } from "src/app/shared/models/Sale";
+import { AuthenticationService } from "src/app/shared/services/authentication.service";
 
 @Component({
   selector: "app-list-pending",
@@ -28,7 +29,8 @@ export class ListPendingComponent implements OnInit {
     private alertModal: AlertModalService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authentication: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -36,13 +38,15 @@ export class ListPendingComponent implements OnInit {
   }
 
   listAll() {
-    this.data$ = this.salesService.listAllByStatus(STATUS.TORECEIVED).pipe(
-      catchError((error: any) => {
-        this.handleError();
-        // this.error$.next(true);
-        return EMPTY;
-      })
-    );
+    this.data$ = this.salesService
+      .listAllByStatus(STATUS.TORECEIVED, this.authentication.business)
+      .pipe(
+        catchError((error: any) => {
+          this.handleError();
+          // this.error$.next(true);
+          return EMPTY;
+        })
+      );
   }
 
   handleError() {

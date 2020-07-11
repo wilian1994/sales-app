@@ -23,6 +23,10 @@ export class AuthenticationService {
     return this.currentUserSubject.getValue();
   }
 
+  public get business() {
+    return this.currentUserValue.business;
+  }
+
   login(nome: string, senha: string) {
     return this.http
       .post<any>(`${environment.API}auth`, { nome, senha })

@@ -1,4 +1,5 @@
-export class Category{
-  _id? : string;
+export class Category {
+  _id?: string;
   name: string;
+  business: string;
 }

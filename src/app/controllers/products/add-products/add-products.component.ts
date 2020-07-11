@@ -8,6 +8,7 @@ import { Location } from "@angular/common";
 import { ProductsService } from "../products.service";
 import { Product } from "src/app/shared/models/Product";
 import { AlertModalService } from "src/app/shared/services/alert-modal.service";
+import { AuthenticationService } from "src/app/shared/services/authentication.service";
 
 @Component({
   selector: "app-add-products",
@@ -27,12 +28,13 @@ export class AddProductsComponent implements OnInit {
     private alertModal: AlertModalService,
     private location: Location,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authentication: AuthenticationService
   ) {}
 
   ngOnInit() {
     this.categoriessService
-      .listAll()
+      .listByBusiness(this.authentication.currentUserValue.business)
       .subscribe((categories: any) => (this.categories$ = categories));
     this.id = this.route.snapshot.params["id"];
     if (this.id) {
@@ -53,7 +55,8 @@ export class AddProductsComponent implements OnInit {
       category: [product ? product.category._id : "", Validators.required],
       quantity: [product ? product.quantity : "", Validators.required],
       price: [product ? product.price : "", Validators.required],
-      lastedSale: [product ? product.lastedSale : "", Validators.required]
+      lastedSale: [product ? product.lastedSale : "", Validators.required],
+      business: [this.authentication.currentUserValue.business]
     });
   }
 
@@ -83,9 +86,8 @@ export class AddProductsComponent implements OnInit {
     return !this.register.get(field).valid && this.register.get(field).touched;
   }
 
-  onCancel() {
-    this.submitted = false;
+  onCancel(event: Event) {
     this.register.reset();
-    this.router.navigateByUrl("/products");
+    this.location.back();
   }
 }

@@ -23,7 +23,7 @@ import { AuthenticationService } from "../../services/authentication.service";
   styleUrls: ["./mat-table.component.css"]
 })
 export class MatTableComponent implements OnInit {
-  @Input() link: string;
+  @Input() link: any;
   @Input() service: any;
   @Input() displayedColumns: string[];
   @Input() receipt: boolean = false;
@@ -50,7 +50,7 @@ export class MatTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("AUTENTICATION", this.authentication.currentUserValue);
+    console.log("link", this.link);
     this.displayedColumns.unshift("select");
     this.listAll();
   }
@@ -84,6 +84,10 @@ export class MatTableComponent implements OnInit {
     });
   }
 
+  onNewObject() {
+    this.router.navigate(this.link);
+  }
+
   ngAfterViewInit(): void {
     this.data$.sort = this.sort;
     this.data$.paginator = this.paginator;
@@ -91,7 +95,7 @@ export class MatTableComponent implements OnInit {
 
   listAll() {
     this.service
-      .listAll()
+      .listByBusiness(this.authentication.currentUserValue.business)
       .pipe(
         tap(element => console.log("elemento", element)),
         catchError((error: any) => {
@@ -129,6 +133,7 @@ export class MatTableComponent implements OnInit {
           salesMan: "Wilian",
           orderCode: "44444",
           priceProduct: product.price,
+          business: this.authentication.currentUserValue.business,
           totalPriceProduct,
           salesValue: result.totalSales / result.quantity,
           grossAmount: result.totalSales - totalPriceProduct - freight,

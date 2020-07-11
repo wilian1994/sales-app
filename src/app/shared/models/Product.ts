@@ -8,4 +8,5 @@ export class Product {
   price: number;
   lastedSale: Date;
   days: string;
+  business: string;
 }

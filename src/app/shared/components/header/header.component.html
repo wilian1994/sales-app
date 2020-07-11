@@ -42,11 +42,11 @@
         </mat-expansion-panel-header>
         <a mat-list-item [routerLink]="['/orders/pending']">
           <mat-icon aria-label="Side nav toggle icon">local_atm</mat-icon>
-          <div class="menu-text">Vendidos</div>
+          <div class="menu-text" (click)="sidenav.toggle()">Vendidos</div>
         </a>
         <a mat-list-item [routerLink]="['/orders/finalized']">
           <mat-icon aria-label="Side nav toggle icon">done</mat-icon>
-          <div class="menu-text">Finalizados</div>
+          <div class="menu-text" (click)="sidenav.toggle()">Finalizados</div>
         </a>
       </mat-expansion-panel>
     </mat-nav-list>

@@ -1,6 +1,11 @@
 <div class="container">
   <div class="newer float-right">
-    <button mat-raised-button color="primary">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onNewObject()"
+      routerLinkActive="router-link-active"
+    >
       {{ "default.add" | translate }}
     </button>
   </div>

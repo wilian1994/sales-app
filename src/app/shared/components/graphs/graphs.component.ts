@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Chart } from "chart.js";
 import { GraphsService } from "./graphs.service";
+import { AuthenticationService } from "../../services/authentication.service";
 @Component({
   selector: "app-graphs",
   templateUrl: "./graphs.component.html",
@@ -13,7 +14,10 @@ export class GraphsComponent implements OnInit {
   @ViewChild("products", { static: true }) elementProducts: ElementRef;
   salesMonth: any;
 
-  constructor(private graphService: GraphsService) {}
+  constructor(
+    private graphService: GraphsService,
+    private authentication: AuthenticationService
+  ) {}
 
   ngOnInit() {
     new Chart(this.element.nativeElement, {
@@ -166,9 +170,11 @@ export class GraphsComponent implements OnInit {
   }
 
   async listSalesMonth() {
-    await this.graphService.listSalesMonth().subscribe((data: any) => {
-      console.log(data);
-      this.salesMonth = data;
-    });
+    await this.graphService
+      .listSalesMonth(this.authentication.business)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.salesMonth = data;
+      });
   }
 }

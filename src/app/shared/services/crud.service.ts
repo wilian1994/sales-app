@@ -1,14 +1,24 @@
 import { take } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { AuthenticationService } from "./authentication.service";
 
 export class CrudService<T> {
+  public authentication: AuthenticationService;
   constructor(protected httpClient: HttpClient, private API_URL: string) {}
 
   listAll(): Observable<T[]> {
     console.log("listall");
     return this.httpClient
       .get<T[]>(this.API_URL)
+      .pipe
+      // delay(2000),
+      ();
+  }
+
+  listByBusiness(business: any): Observable<T[]> {
+    return this.httpClient
+      .get<T[]>(`${this.API_URL}/businesses/${business}`)
       .pipe
       // delay(2000),
       ();
