@@ -54,14 +54,13 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-
         <mat-form-field class="full-width">
-          <input
-            matInput
-            placeholder="Investidor"
-            name="investor"
-            formControlName="investor"
-          />
+          <mat-label>Investidor</mat-label>
+          <mat-select formControlName="investor">
+            <mat-option *ngFor="let inv of investor$" [value]="inv.name">
+              {{ inv.name }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
         <mat-form-field class="full-width">

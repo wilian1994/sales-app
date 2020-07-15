@@ -118,7 +118,7 @@ export class MatTableComponent implements OnInit {
   onChangeStatus(product: any): void {
     console.log(product);
     const dialogRef = this.dialog.open(DialogPendingComponent, {
-      height: "500px",
+      height: "600px",
       width: "300px",
       data: {}
     });
@@ -130,11 +130,11 @@ export class MatTableComponent implements OnInit {
         const freight = result.freight || 0;
         const data: any = {
           product: product._id,
-          salesMan: "Wilian",
-          orderCode: "44444",
+          orderCode: result.orderCode,
           priceProduct: product.price,
           business: this.authentication.currentUserValue.business,
           totalPriceProduct,
+          finalValue: product.finalValue,
           salesValue: result.totalSales / result.quantity,
           grossAmount: result.totalSales - totalPriceProduct - freight,
           days: product.days,

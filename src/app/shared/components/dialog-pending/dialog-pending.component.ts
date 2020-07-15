@@ -14,6 +14,14 @@ import { Marketplace } from "../../models/Marketplace";
 export class DialogPendingComponent implements OnInit {
   freight = false;
   marketplace$: Marketplace[] = [];
+  investor$: any = [
+    { name: "Wilian" },
+    { name: "Will" },
+    { name: "Daniel" },
+    { name: "Daniel" },
+    { name: "Lulinha" },
+    { name: "André" }
+  ];
 
   constructor(
     public dialogRef: MatDialogRef<ListReceivedComponent>,

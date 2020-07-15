@@ -12,6 +12,7 @@
       [(ngModel)]="data.totalSales"
     />
   </mat-form-field>
+
   <mat-form-field class="full-width">
     <input
       matInput
@@ -45,6 +46,23 @@
     <mat-select [(ngModel)]="data.marketplace">
       <mat-option *ngFor="let market of marketplace$" [value]="market._id">
         {{ market.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      placeholder="N Pedido"
+      name="orderCode"
+      [(ngModel)]="data.orderCode"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Investidor</mat-label>
+
+    <mat-select [(ngModel)]="data.investor">
+      <mat-option *ngFor="let invest of investor$" [value]="invest.name">
+        {{ invest.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>

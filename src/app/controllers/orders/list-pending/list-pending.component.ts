@@ -19,7 +19,7 @@ import { AuthenticationService } from "src/app/shared/services/authentication.se
 })
 export class ListPendingComponent implements OnInit {
   data$: any;
-  displayedColumns = ["name", "salesValue", "lucro", "actions"];
+  displayedColumns = ["name", "salesValue", "lucro", "orderCode", "actions"];
   error$ = new Subject<boolean>();
 
   constructor(
