@@ -39,7 +39,7 @@ export class AddCategoriesNewComponent implements OnInit {
     });
   }
 
-  private save() {
+  save() {
     this.submitted = true;
     if (this.register.valid) {
       const data = this.register.value;

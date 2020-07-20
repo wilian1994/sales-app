@@ -26,130 +26,22 @@ import { STATUS } from "src/app/shared/models/Status";
   styleUrls: ["./list-awaiting.component.css"]
 })
 export class ListAwaitingComponent implements OnInit {
-  public data$ = new MatTableDataSource<Order>();
   displayedColumns = [
-    "name",
+    "product",
     "store",
     "tracking",
     "purchaseValue",
     "quantity",
     "actions"
   ];
-  error$ = new Subject<boolean>();
-  search: Subject<string> = new Subject<string>();
-  searching: string = "";
-  totalSize = 0;
-  pageIndex = 0;
-  pageSize = 5;
-  mobile: boolean = false;
-  skip = 0;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, null) sort: MatSort;
+  link: string = "/orders/register";
+  service: any;
+  actions = { awaiting: true };
+  status = STATUS.AWAITING;
 
-  constructor(
-    private ordersService: OrdersService,
-    private alertService: AlertModalService,
-    private router: Router,
-    private alertModal: AlertModalService,
-    private route: ActivatedRoute,
-    public dialog: MatDialog,
-    private fb: FormBuilder
-  ) {}
+  constructor(private ordersService: OrdersService) {}
 
   ngOnInit() {
-    // if (window.screen.width <= 768) { // 768px portrait
-    //   this.displayedColumns = ['name', 'actions-mobile'];
-    // }
-    this.search.pipe(debounceTime(400)).subscribe(() => {
-      this.listAll();
-    });
-    this.listAll();
-  }
-
-  ngAfterViewInit(): void {
-    this.data$.sort = this.sort;
-    this.data$.paginator = this.paginator;
-  }
-
-  listAll() {
-    this.ordersService
-      .listAllByStatus(STATUS.AWAITING)
-      .pipe(
-        catchError((error: any) => {
-          this.handleError();
-          return EMPTY;
-        })
-      )
-      .subscribe((data: any) => {
-        this.data$ = data;
-      });
-    // const data: any = { search: this.searching, status: STATUS.AWAITING, skip: this.skip }
-    // this.pageIndex = 0;
-    // this.totalSize = 0;
-    // this.ordersService.listBySearch(data)
-    //   .pipe(
-    //     catchError((error: any) => {
-    //       this.handleError()
-    //       // this.error$.next(true);
-    //       return EMPTY;
-    //     })
-    //   )
-    //   .subscribe((data: any) => {
-    //     this.data$.data = data.filterOrdes;
-    //     this.data$.paginator = this.paginator;
-    //     this.totalSize = data.count;
-    //   });
-  }
-
-  getPaginatorData(event: any) {
-    this.skip = event.pageSize * event.pageIndex;
-    this.listAll();
-  }
-
-  handleError() {
-    this.alertService.showAlertDanger(
-      "Erro ao carregar pedidos. Tente novamentes  mais tarde!"
-    );
-  }
-
-  onEdit(id: string) {
-    this.router.navigate(["edit", id], { relativeTo: this.route });
-  }
-
-  onDelete(id: string) {
-    const result$ = this.alertService.showConfirm(
-      "Confirmação",
-      "Tem certeza que deseja removar este registro",
-      "Não",
-      "Sim"
-    );
-    result$
-      .asObservable()
-      .pipe(
-        take(1),
-        switchMap(result => (result ? this.ordersService.delete(id) : EMPTY))
-      )
-      .subscribe(
-        () => this.listAll(),
-        err => alert("ERRO ao remover o pedido")
-      );
-  }
-
-  openDialog(): void {
-    this.dialog.open(DialogModalComponent, {
-      height: "600px",
-      width: "600px",
-      data: {}
-    });
-  }
-
-  onChangeStatus(order: Order): void {
-    this.ordersService.orderConfirmed(order).subscribe(() => {
-      this.listAll();
-    });
-  }
-
-  onSearch(event) {
-    this.search.next();
+    this.service = this.ordersService;
   }
 }

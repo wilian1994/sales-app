@@ -6,6 +6,8 @@ import { CommonModule } from "@angular/common";
 import { SharedModule } from "src/app/shared/shared.module";
 import { ProductsRoutingModule } from "./products.routing.module";
 import { MaterialModule } from "src/app/material.example.module";
+import { CurrencyMaskModule, CURRENCY_MASK_CONFIG } from "ng2-currency-mask";
+import { CustomCurrencyMaskConfig } from "src/app/shared/utils/CustomCurrencyMaskConfig";
 
 @NgModule({
   declarations: [ListProductsComponent, AddProductsComponent],
@@ -15,7 +17,11 @@ import { MaterialModule } from "src/app/material.example.module";
     ProductsRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    CurrencyMaskModule
+  ],
+  providers: [
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ]
 })
 export class ProductsModule {}

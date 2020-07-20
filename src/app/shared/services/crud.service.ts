@@ -1,5 +1,5 @@
 import { take } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AuthenticationService } from "./authentication.service";
 
@@ -7,10 +7,14 @@ export class CrudService<T> {
   public authentication: AuthenticationService;
   constructor(protected httpClient: HttpClient, private API_URL: string) {}
 
-  listAll(): Observable<T[]> {
-    console.log("listall");
+  listAll(business, status): Observable<T[]> {
+    let params = new HttpParams();
+    params = params.append("business", business);
+    params = params.append("status", status);
     return this.httpClient
-      .get<T[]>(this.API_URL)
+      .get<T[]>(this.API_URL, {
+        params: params
+      })
       .pipe
       // delay(2000),
       ();

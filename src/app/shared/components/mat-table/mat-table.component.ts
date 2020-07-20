@@ -16,6 +16,8 @@ import { DialogModalComponent } from "../dialog-modal/dialog-modal.component";
 import { DialogPendingComponent } from "../dialog-pending/dialog-pending.component";
 import { SelectionModel } from "@angular/cdk/collections";
 import { AuthenticationService } from "../../services/authentication.service";
+import { Sale } from "../../models/Sale";
+import { Order } from "../../models/Order";
 
 @Component({
   selector: "app-mat-table",
@@ -26,10 +28,9 @@ export class MatTableComponent implements OnInit {
   @Input() link: any;
   @Input() service: any;
   @Input() displayedColumns: string[];
-  @Input() receipt: boolean = false;
-  @Input() sale: boolean = false;
   @Input() sortActive: string = "update";
-
+  @Input() status: STATUS;
+  @Input() actionsButton: any;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, null) sort: MatSort;
 
@@ -50,7 +51,7 @@ export class MatTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("link", this.link);
+    console.log("link", this.actionsButton);
     this.displayedColumns.unshift("select");
     this.listAll();
   }
@@ -59,8 +60,9 @@ export class MatTableComponent implements OnInit {
     this.data$.filter = value.trim().toLocaleLowerCase();
   }
 
-  onEdit(id: string) {
-    // this.router.navigate(["edit", id], { relativeTo: this.route });
+  onEdit(data) {
+    console.log(data._id);
+    this.router.navigateByUrl(`${this.link}/${data._id}`);
   }
 
   onUpdate(product: any) {
@@ -95,7 +97,7 @@ export class MatTableComponent implements OnInit {
 
   listAll() {
     this.service
-      .listByBusiness(this.authentication.currentUserValue.business)
+      .listAll(this.authentication.currentUserValue.business, this.status)
       .pipe(
         tap(element => console.log("elemento", element)),
         catchError((error: any) => {
@@ -114,6 +116,8 @@ export class MatTableComponent implements OnInit {
       "Erro ao carregar pedidos. Tente novamentes  mais tarde!"
     );
   }
+
+  onDelete(data) {}
 
   onChangeStatus(product: any): void {
     console.log(product);
@@ -155,6 +159,22 @@ export class MatTableComponent implements OnInit {
     });
   }
 
+  onChangeStatusSale(sale: Sale): void {
+    let data = sale || this.selection.selected;
+    console.log(data);
+    console.log("onChangeStatus", sale);
+    this.service.completedSale(data).subscribe(
+      // tslint:disable-next-line:no-console
+      () => {
+        this.alertModal.showAlertSucess(
+          "Order alterada para Recebida com sucesso"
+        );
+        this.listAll();
+      },
+      err => console.error("Erro ao cadastrar loja ", err)
+    );
+  }
+
   onUpdateAll() {
     let teste = this.selection.selected.slice(0, this.paginator.pageSize);
   }
@@ -170,5 +190,17 @@ export class MatTableComponent implements OnInit {
     this.isAllSelected()
       ? this.selection.clear()
       : this.data$.data.forEach(row => this.selection.select(row));
+  }
+
+  onChangeStatusOrder(data: any): void {
+    this.service.orderConfirmed(data).subscribe(
+      () => {
+        this.alertModal.showAlertSucess(
+          "Order alterada para Recebida com sucesso"
+        );
+        this.listAll();
+      },
+      err => console.error("Erro ao cadastrar loja ", err)
+    );
   }
 }

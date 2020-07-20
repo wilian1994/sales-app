@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "sales-app-7c925": {
+      "hosting": {
+        "sales-app": [
+          "sales-app-7c925"
+        ]
+      }
+    }
+  }
+}

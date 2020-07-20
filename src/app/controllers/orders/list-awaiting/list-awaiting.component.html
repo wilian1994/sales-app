@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="newer float-right">
     <button mat-raised-button color="primary" [routerLink]="['/orders/register']">
       {{ "default.add" | translate }}
@@ -99,4 +99,11 @@
     <mat-paginator #paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10]"
       (page)="getPaginatorData($event)" [length]="totalSize"></mat-paginator>
   </div>
-</div>
+</div> -->
+<app-mat-table
+  [link]="[link]"
+  [service]="service"
+  [status]="status"
+  [actionsButton]="actions"
+  [displayedColumns]="displayedColumns"
+></app-mat-table>

@@ -1,4 +1,4 @@
-<div class="form-style">
+<!-- <div class="form-style">
   <h2>Cadastrar Produtos</h2>
   <hr />
   <form
@@ -62,4 +62,87 @@
       Cancelar
     </button>
   </form>
+</div> -->
+<div class="main-div">
+  <mat-card class="center width50">
+    <mat-card-title class="title-card">Cadastrar Produto</mat-card-title>
+    <form
+      autocomplete="off"
+      novalidate
+      [formGroup]="register"
+      *ngIf="register"
+      (ngSubmit)="onSave()"
+    >
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Nome" name="name" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Categoria</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          [displayWith]="displayCategory"
+        >
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Quantidade"
+          name="quantity"
+          type="number"
+          formControlName="quantity"
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Valor Unitário"
+          name="price"
+          type="value"
+          class="input-price"
+          formControlName="price"
+          currencyMask
+        />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Data</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          (focus)="picker.open()"
+          f
+          formControlName="lastedSale"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-card-actions>
+        <button
+          type="reset"
+          color="default"
+          mat-raised-button
+          (click)="onCancel()"
+        >
+          Cancelar
+        </button>
+        <button type="submit" color="primary" mat-raised-button>Salvar</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
 </div>

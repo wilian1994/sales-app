@@ -33,6 +33,7 @@ export class ListReceivedComponent implements OnInit {
   ];
   link: string = "/products/register";
   service: any;
+  actions = { received: true };
 
   constructor(private productService: ProductsService) {}
 

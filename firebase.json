@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "sales-app",
+      "public": "dist/sales-app",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

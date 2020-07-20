@@ -92,10 +92,30 @@ align-left {
   width: 50px;
 }
 
+.w-45 {
+  width: 45px;
+}
+
+.w-40 {
+  width: 40px;
+}
+
+.w-30 {
+  width: 30px;
+}
+
 .w-100 {
   width: 100px;
 }
 
 .w-200 {
   width: 200px;
+}
+
+.green-icon {
+  color: green !important;
+}
+
+.input-price {
+  text-align: left !important;
 }

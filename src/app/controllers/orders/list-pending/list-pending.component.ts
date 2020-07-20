@@ -18,86 +18,79 @@ import { AuthenticationService } from "src/app/shared/services/authentication.se
   styleUrls: ["./list-pending.component.css"]
 })
 export class ListPendingComponent implements OnInit {
-  data$: any;
-  displayedColumns = ["name", "salesValue", "lucro", "orderCode", "actions"];
+  displayedColumns = ["product", "salesValue", "lucro", "orderCode", "actions"];
+  service: any;
   error$ = new Subject<boolean>();
+  status = STATUS.TORECEIVED;
+  actions = { toreceived: true };
+  link = null;
 
-  constructor(
-    private ordersService: OrdersService,
-    private salesService: SalesService,
-    private alertService: AlertModalService,
-    private alertModal: AlertModalService,
-    private router: Router,
-    private route: ActivatedRoute,
-    public dialog: MatDialog,
-    private authentication: AuthenticationService
-  ) {}
+  constructor(private salesService: SalesService) {}
 
   ngOnInit() {
-    this.listAll();
+    this.service = this.salesService;
   }
 
-  listAll() {
-    this.data$ = this.salesService
-      .listAllByStatus(STATUS.TORECEIVED, this.authentication.business)
-      .pipe(
-        catchError((error: any) => {
-          this.handleError();
-          // this.error$.next(true);
-          return EMPTY;
-        })
-      );
-  }
+  // listAll() {
+  //   this.data$ = this.salesService
+  //     .listAllByStatus(STATUS.TORECEIVED, this.authentication.business)
+  //     .pipe(
+  //       catchError((error: any) => {
+  //         this.handleError();
+  //         // this.error$.next(true);
+  //         return EMPTY;
+  //       })
+  //     );
+  // }
+  // handleError() {
+  //   this.alertService.showAlertDanger(
+  //     "Erro ao carregar pedidos. Tente novamentes  mais tarde!"
+  //   );
+  // }
 
-  handleError() {
-    this.alertService.showAlertDanger(
-      "Erro ao carregar pedidos. Tente novamentes  mais tarde!"
-    );
-  }
+  // onEdit(id: string) {
+  //   this.router.navigate(["edit", id], { relativeTo: this.route });
+  // }
 
-  onEdit(id: string) {
-    this.router.navigate(["edit", id], { relativeTo: this.route });
-  }
+  // onDelete(id: string) {
+  //   const result$ = this.alertService.showConfirm(
+  //     "Confirmação",
+  //     "Tem certeza que deseja removar este registro",
+  //     "Não",
+  //     "Sim"
+  //   );
+  //   result$
+  //     .asObservable()
+  //     .pipe(
+  //       take(1),
+  //       switchMap(result => (result ? this.ordersService.delete(id) : EMPTY))
+  //     )
+  //     .subscribe(
+  //       () => this.listAll(),
+  //       err => alert("ERRO ao remover o pedido")
+  //     );
+  // }
 
-  onDelete(id: string) {
-    const result$ = this.alertService.showConfirm(
-      "Confirmação",
-      "Tem certeza que deseja removar este registro",
-      "Não",
-      "Sim"
-    );
-    result$
-      .asObservable()
-      .pipe(
-        take(1),
-        switchMap(result => (result ? this.ordersService.delete(id) : EMPTY))
-      )
-      .subscribe(
-        () => this.listAll(),
-        err => alert("ERRO ao remover o pedido")
-      );
-  }
+  // openDialog(): void {
+  //   this.dialog.open(DialogModalComponent, {
+  //     height: "600px",
+  //     width: "600px",
+  //     data: {}
+  //   });
+  // }
 
-  openDialog(): void {
-    this.dialog.open(DialogModalComponent, {
-      height: "600px",
-      width: "600px",
-      data: {}
-    });
-  }
-
-  onChangeStatus(sale: Sale): void {
-    sale.status = STATUS.FINALIZED;
-    console.log("onChangeStatus", sale);
-    this.salesService.completedSale(sale).subscribe(
-      // tslint:disable-next-line:no-console
-      () => {
-        this.alertModal.showAlertSucess(
-          "Order alterada para Recebida com sucesso"
-        );
-        this.listAll();
-      },
-      err => console.error("Erro ao cadastrar loja ", err)
-    );
-  }
+  // onChangeStatus(sale: Sale): void {
+  //   sale.status = STATUS.FINALIZED;
+  //   console.log("onChangeStatus", sale);
+  //   this.salesService.completedSale(sale).subscribe(
+  //     // tslint:disable-next-line:no-console
+  //     () => {
+  //       this.alertModal.showAlertSucess(
+  //         "Order alterada para Recebida com sucesso"
+  //       );
+  //       this.listAll();
+  //     },
+  //     err => console.error("Erro ao cadastrar loja ", err)
+  //   );
+  // }
 }

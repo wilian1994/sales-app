@@ -80,7 +80,8 @@ export class AddOrdersComponent implements OnInit {
       investor: [order ? order.investor : "", Validators.required],
       paymentType: [order ? order.paymentType : "", Validators.required],
       quantity: [order ? order.quantity : "", Validators.required],
-      status: [STATUS.AWAITING]
+      status: [STATUS.AWAITING],
+      business: [this.authentication.currentUserValue.business]
     });
   }
 
@@ -94,16 +95,18 @@ export class AddOrdersComponent implements OnInit {
 
   private loadPaymentTypes() {
     this.paymentTypesService
-      .listAll()
+      .listAll(this.authentication.business, null)
       .subscribe((paymentTypes: PaymentType[]) => {
         this.paymentTypes$ = paymentTypes;
       });
   }
 
   private loadStores() {
-    this.storesService.listAll().subscribe((stores: Store[]) => {
-      this.stores$ = stores;
-    });
+    this.storesService
+      .listAll(this.authentication.business, null)
+      .subscribe((stores: Store[]) => {
+        this.stores$ = stores;
+      });
   }
 
   onSave() {

@@ -31,6 +31,7 @@ import { SalesComponent } from "./controllers/sales/sales.component";
 import { GraphsComponent } from "./shared/components/graphs/graphs.component";
 import { LoginComponent } from "./controllers/login/login.component";
 import { LoginModule } from "./controllers/login/login.module";
+import { AddMarketplacesComponent } from "./controllers/marketplaces/add-marketplaces/add-marketplaces.component";
 
 registerLocaleData(localePt, "pt");
 
@@ -40,7 +41,8 @@ registerLocaleData(localePt, "pt");
     HeaderComponent,
     GraphsComponent,
     FooterComponent,
-    SalesComponent
+    SalesComponent,
+    AddMarketplacesComponent
   ],
   imports: [
     CategoriesModule,

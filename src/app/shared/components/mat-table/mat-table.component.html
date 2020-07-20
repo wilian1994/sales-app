@@ -4,7 +4,7 @@
       mat-raised-button
       color="primary"
       (click)="onNewObject()"
-      routerLinkActive="router-link-active"
+      *ngIf="link"
     >
       {{ "default.add" | translate }}
     </button>
@@ -17,13 +17,30 @@
   </div>
   <div class="example-container mat-elevation-z8">
     <div class="button-all">
-      <button mat-menu-item *ngIf="sale" (click)="onUpdateAll(data)">
+      <button
+        mat-menu-item
+        *ngIf="actionsButton.received"
+        color="primary"
+        aria-label="Atualizar"
+        (click)="onUpdate(data)"
+      >
         <mat-icon class="action-button" color="primary">update</mat-icon>
-        <span>Atualzar Valores</span>
+        <span>Atualizar Valores</span>
+      </button>
+      <button
+        *ngIf="actionsButton.toreceived"
+        mat-menu-item
+        aria-label="More"
+        (click)="onChangeStatusSale(data)"
+      >
+        <mat-icon class="action-button button-check green-icon">
+          check
+        </mat-icon>
+        <span>Venda Recebida</span>
       </button>
     </div>
     <div class="button-all">
-      <button mat-menu-item aria-label="Delete" (click)="onDelete(row._id)">
+      <button mat-menu-item aria-label="Delete">
         <mat-icon class="action-button" color="warn">delete</mat-icon>
         <span>Excluir</span>
       </button>
@@ -61,12 +78,13 @@
           {{ row.name }}
         </td>
       </ng-container>
-
       <ng-container matColumnDef="product">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">
           {{ "default.name" | translate }}
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.product.name }}</td>
+        <td mat-cell *matCellDef="let row" style="text-align: left;">
+          {{ row.product.name }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="store">
@@ -133,6 +151,27 @@
         </td>
       </ng-container>
 
+      <!-- list-pending -->
+
+      <ng-container matColumnDef="salesValue">
+        <th mat-header-cell *matHeaderCellDef>Valor da Venda</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.salesValue | currency: "R$" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lucro">
+        <th mat-header-cell *matHeaderCellDef>Lucro</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.grossAmount | currency: "R$" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="orderCode">
+        <th mat-header-cell *matHeaderCellDef>Nº</th>
+        <td mat-cell *matCellDef="let element">{{ element.orderCode }}</td>
+      </ng-container>
+
       <ng-container matColumnDef="actions" stickyEnd>
         <th mat-header-cell *matHeaderCellDef class="action">
           {{ "default.action" | translate }}
@@ -145,6 +184,16 @@
           >
             <mat-icon>more_vert</mat-icon>
           </button>
+        </td>
+      </ng-container>
+      <!-- list-awaiting -->
+
+      <ng-container matColumnDef="purchaseValue">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ "order.value" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.purchaseValue | currency: "R$" }}
         </td>
       </ng-container>
 
@@ -183,7 +232,7 @@
         color="primary"
         mat-menu-item
         aria-label="Edit"
-        (click)="onEdit(row._id)"
+        (click)="onEdit(data)"
       >
         <mat-icon class="action-button">edit</mat-icon>
         <span>Editar</span>
@@ -201,13 +250,15 @@
         color="warn"
         mat-menu-item
         aria-label="Delete"
-        (click)="onDelete(row._id)"
+        (click)="onDelete(data)"
       >
         <mat-icon class="action-button">delete</mat-icon>
         <span>Excluir</span>
       </button>
+
+      <!-- list-received -->
       <button
-        *ngIf="sale"
+        *ngIf="actionsButton.received"
         mat-menu-item
         aria-label="More"
         (click)="onChangeStatus(data)"
@@ -215,26 +266,41 @@
         <mat-icon class="action-button button-check">local_atm</mat-icon>
         <span>Realizar Venda</span>
       </button>
+
       <button
         mat-menu-item
-        *ngIf="sale"
+        *ngIf="actionsButton.received"
         color="primary"
         aria-label="Atualizar"
         (click)="onUpdate(data)"
       >
         <mat-icon class="action-button" color="primary">update</mat-icon>
-        <span>Atualzar Valores</span>
+        <span>Atualizar Valores</span>
       </button>
+
+      <!-- list-pending -->
       <button
-        *ngIf="receipt"
+        *ngIf="actionsButton.toreceived"
         mat-menu-item
         aria-label="More"
-        (click)="onChangeStatus(row)"
+        color="success"
+        (click)="onChangeStatusSale(data)"
+      >
+        <mat-icon class="action-button button-check green-icon">check</mat-icon>
+        <span>Venda Recebida</span>
+      </button>
+
+      <!-- list-awaiting -->
+      <button
+        mat-menu-item
+        aria-label="More"
+        (click)="onChangeStatusOrder(data)"
+        *ngIf="actionsButton.awaiting"
       >
         <mat-icon class="action-button button-check">
           where_to_vote
         </mat-icon>
-        <span>Configurações</span>
+        <span>Chegou</span>
       </button>
     </ng-template>
   </mat-menu>

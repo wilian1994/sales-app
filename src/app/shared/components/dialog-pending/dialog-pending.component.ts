@@ -5,6 +5,7 @@ import { MarketplaceService } from "src/app/controllers/marketplaces/marketplace
 import { catchError } from "rxjs/operators";
 import { EMPTY, Observable } from "rxjs";
 import { Marketplace } from "../../models/Marketplace";
+import { AuthenticationService } from "../../services/authentication.service";
 
 @Component({
   selector: "app-dialog-pending",
@@ -26,13 +27,16 @@ export class DialogPendingComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ListReceivedComponent>,
     private marketService: MarketplaceService,
+    private authentication: AuthenticationService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
-    this.marketService.listAll().subscribe((marketplaces: Marketplace[]) => {
-      this.marketplace$ = marketplaces;
-    });
+    this.marketService
+      .listAll(this.authentication.business, null)
+      .subscribe((marketplaces: Marketplace[]) => {
+        this.marketplace$ = marketplaces;
+      });
   }
 
   onNoClick(): void {
