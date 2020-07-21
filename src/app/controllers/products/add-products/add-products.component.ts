@@ -44,23 +44,29 @@ export class AddProductsComponent implements OnInit {
 
   ngOnInit() {
     console.log("data", this.route.data);
+    Promise.resolve(this.listCategories()).then(() => {
+      this.id = this.route.snapshot.params["id"];
+
+      if (this.id) {
+        this.productsService
+          .view(this.id)
+          .subscribe((product: Product) => this.createForm(product));
+        return;
+      } else {
+        this.createForm();
+      }
+
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(""),
+        map(value => this._filter(value))
+      );
+    });
+  }
+
+  private async listCategories() {
     this.categoriessService
       .listByBusiness(this.authentication.currentUserValue.business)
       .subscribe((categories: any) => (this.categories$ = categories));
-    console.log(this.route.snapshot.params);
-    this.id = this.route.snapshot.params["id"];
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(""),
-      map(value => this._filter(value))
-    );
-    if (this.id) {
-      this.productsService
-        .view(this.id)
-        .subscribe((product: Product) => this.createForm(product));
-      return;
-    }
-
-    this.createForm();
   }
 
   private _filter(obj: Category): Category[] {
@@ -95,6 +101,7 @@ export class AddProductsComponent implements OnInit {
   onSave() {
     console.log("call save");
     this.submitted = true;
+    this.register.get("category").setValue(this.myControl.value._id);
     if (this.register.valid) {
       let data = this.register.value;
       data.category = this.myControl.value._id;

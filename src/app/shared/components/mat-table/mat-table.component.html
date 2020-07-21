@@ -22,7 +22,7 @@
         *ngIf="actionsButton.received"
         color="primary"
         aria-label="Atualizar"
-        (click)="onUpdate(data)"
+        (click)="onUpdate(null)"
       >
         <mat-icon class="action-button" color="primary">update</mat-icon>
         <span>Atualizar Valores</span>
@@ -31,7 +31,7 @@
         *ngIf="actionsButton.toreceived"
         mat-menu-item
         aria-label="More"
-        (click)="onChangeStatusSale(data)"
+        (click)="onChangeStatusSale(null)"
       >
         <mat-icon class="action-button button-check green-icon">
           check

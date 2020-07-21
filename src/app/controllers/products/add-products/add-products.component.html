@@ -76,7 +76,6 @@
       <mat-form-field class="full-width">
         <input matInput placeholder="Nome" name="name" formControlName="name" />
       </mat-form-field>
-
       <mat-form-field class="full-width">
         <mat-label>Categoria</mat-label>
         <input
@@ -87,6 +86,7 @@
         />
         <mat-autocomplete
           #auto="matAutocomplete"
+          autoActiveFirstOption
           [displayWith]="displayCategory"
         >
           <mat-option
