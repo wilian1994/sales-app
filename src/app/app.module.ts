@@ -32,6 +32,11 @@ import { GraphsComponent } from "./shared/components/graphs/graphs.component";
 import { LoginComponent } from "./controllers/login/login.component";
 import { LoginModule } from "./controllers/login/login.module";
 import { AddMarketplacesComponent } from "./controllers/marketplaces/add-marketplaces/add-marketplaces.component";
+import { environment } from "../environments/environment";
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireStorageModule } from "@angular/fire/storage";
 
 registerLocaleData(localePt, "pt");
 
@@ -63,6 +68,10 @@ registerLocaleData(localePt, "pt");
         deps: [HttpClient]
       }
     }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     MaterialModule,
     CurrencyMaskModule

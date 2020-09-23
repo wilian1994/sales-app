@@ -11,11 +11,8 @@ import {
   MatSort,
   MatTableDataSource
 } from "@angular/material";
-import { STATUS } from "src/app/shared/models/Status";
-import { DialogPendingComponent } from "src/app/shared/components/dialog-pending/dialog-pending.component";
 import { ProductsService } from "../../products/products.service";
-import { SalesService } from "../../sales/sales.service";
-import { Product } from "src/app/shared/models/Product";
+import { FirebaseService } from "src/app/core/services/firebase.service";
 
 @Component({
   selector: "app-list-received",
@@ -23,21 +20,51 @@ import { Product } from "src/app/shared/models/Product";
   styleUrls: ["./list-received.component.css"]
 })
 export class ListReceivedComponent implements OnInit {
-  displayedColumns = [
-    "name",
-    "price",
-    "quantity",
-    "days",
-    "suggestedValue",
-    "actions"
-  ];
+  displayedColumns = ["name", "days", "actions"];
   link: string = "/products/register";
   service: any;
   actions = { received: true };
+  products: any[] = [];
 
-  constructor(private productService: ProductsService) {}
+  constructor(
+    private productService: ProductsService,
+    private firebase: FirebaseService
+  ) {}
 
   ngOnInit() {
     this.service = this.productService;
+
+    this.firebase.reads().subscribe(data => {
+      data.forEach(e => {
+        const data: any = e.payload.doc.data();
+        let product: any = {
+          name: data.descricao,
+          days: this.calculateDate(data),
+          id: e.payload.doc.id
+        };
+        if (data.saleDate) product.saleDate = data.saleDate;
+
+        this.products.push(product);
+      });
+    });
+  }
+
+  calculateDate(data) {
+    const document = data.updateDate;
+    const saleDate = this.subDate(data.saleDate);
+    var result = 100;
+
+    if (document != null)
+      result = new Date().getDate() - new Date(document * 1000).getDate();
+
+    if (data.saleDate != null && saleDate > 10 && result < 7) {
+      result = saleDate;
+    }
+
+    return result;
+  }
+
+  subDate(document) {
+    return new Date().getDate() - new Date(document).getDate();
   }
 }

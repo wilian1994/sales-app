@@ -4,7 +4,16 @@
 
 export const environment = {
   production: false,
-  API: "http://localhost:5000/"
+  API: "http://localhost:5000/",
+  firebaseConfig: {
+    apiKey: "AIzaSyB4C367ZGu_qY6G7jy6j8NW2P7D-HO6CUY",
+    authDomain: "sales-app-7c925.firebaseapp.com",
+    databaseURL: "https://sales-app-7c925.firebaseio.com",
+    projectId: "sales-app-7c925",
+    storageBucket: "sales-app-7c925.appspot.com",
+    messagingSenderId: "321061615688",
+    appId: "1:321061615688:web:5d91eaa2055c752f18007d"
+  }
 };
 
 /*

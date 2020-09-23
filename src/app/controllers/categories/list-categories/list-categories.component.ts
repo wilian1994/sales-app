@@ -8,6 +8,23 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { CategoriesService } from "../add-categories/categories.service";
 import { AuthenticationService } from "src/app/shared/services/authentication.service";
 
+// Add the Firebase products that you want to use
+import "firebase/auth";
+import "firebase/firestore";
+import { FirebaseService } from "src/app/core/services/firebase.service";
+
+var firebaseConfig = {
+  apiKey: "AIzaSyB4C367ZGu_qY6G7jy6j8NW2P7D-HO6CUY",
+  authDomain: "sales-app-7c925.firebaseapp.com",
+  databaseURL: "https://sales-app-7c925.firebaseio.com",
+  projectId: "sales-app-7c925",
+  storageBucket: "sales-app-7c925.appspot.com",
+  messagingSenderId: "321061615688",
+  appId: "1:321061615688:web:5d91eaa2055c752f18007d"
+};
+
+// Initialize Firebase
+
 @Component({
   selector: "app-list-categories",
   templateUrl: "./list-categories.component.html",
@@ -24,7 +41,8 @@ export class ListCategoriesComponent implements OnInit {
     private alertService: AlertModalService,
     private router: Router,
     private route: ActivatedRoute,
-    private authentication: AuthenticationService
+    private authentication: AuthenticationService,
+    private firebase: FirebaseService
   ) {}
 
   ngOnInit() {

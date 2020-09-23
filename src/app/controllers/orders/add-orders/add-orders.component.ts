@@ -53,6 +53,7 @@ export class AddOrdersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("bora");
     this.loadProducts();
     this.loadStores();
     this.loadPaymentTypes();

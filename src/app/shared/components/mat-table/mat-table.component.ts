@@ -17,7 +17,10 @@ import { DialogPendingComponent } from "../dialog-pending/dialog-pending.compone
 import { SelectionModel } from "@angular/cdk/collections";
 import { AuthenticationService } from "../../services/authentication.service";
 import { Sale } from "../../models/Sale";
+import { FirebaseService } from "src/app/core/services/firebase.service";
+
 import { Order } from "../../models/Order";
+import { element } from "protractor";
 
 @Component({
   selector: "app-mat-table",
@@ -26,7 +29,7 @@ import { Order } from "../../models/Order";
 })
 export class MatTableComponent implements OnInit {
   @Input() link: any;
-  @Input() service: any;
+  @Input() data: any;
   @Input() displayedColumns: string[];
   @Input() sortActive: string = "update";
   @Input() status: STATUS;
@@ -47,7 +50,8 @@ export class MatTableComponent implements OnInit {
     private alertService: AlertModalService,
     private alertModal: AlertModalService,
     public dialog: MatDialog,
-    public authentication: AuthenticationService
+    public authentication: AuthenticationService,
+    private firebase: FirebaseService
   ) {}
 
   ngOnInit() {
@@ -65,24 +69,25 @@ export class MatTableComponent implements OnInit {
     this.router.navigateByUrl(`${this.link}/${data._id}`);
   }
 
-  onUpdate(product: any) {
+  async onUpdate(product: any) {
+    product.updateDate = new Date();
     console.log(product);
-    product.lastValue = product.finalValue;
-    this.service.save(product).subscribe(
-      // tslint:disable-next-line:no-console
-      () => {
-        this.alertModal.showAlertSucess("Produto alterado com sucesso");
-        this.listAll();
-      },
-      err => console.error("Erro ao cadastrar loja ", err)
-    );
+    try {
+      await this.firebase.update(product.id, product);
+      this.alertModal.showAlertSucess("Produto atualizado com sucesso");
+    } catch (error) {
+      this.alertService.showAlertDanger(
+        "Erro ao carregar pedidos. Tente novamentes  mais tarde!"
+      );
+    }
   }
 
-  openDialog(): void {
+  openDialog(item): void {
+    console.log("item", item);
     this.dialog.open(DialogModalComponent, {
       height: "600px",
       width: "600px",
-      data: {}
+      data: item
     });
   }
 
@@ -95,20 +100,31 @@ export class MatTableComponent implements OnInit {
     this.data$.paginator = this.paginator;
   }
 
+  finalizedOrder(data) {
+    var record = {};
+    record["id"] = data.id;
+    this.firebase.create_order(record);
+  }
+
   listAll() {
-    this.service
-      .listAll(this.authentication.currentUserValue.business, this.status)
-      .pipe(
-        tap(element => console.log("elemento", element)),
-        catchError((error: any) => {
-          this.handleError();
-          // this.error$.next(true);
-          return EMPTY;
-        })
-      )
-      .subscribe(data => {
-        this.data$.data = data;
-      });
+    this.data$.data = this.data.sort((a, b) => {
+      if (a.days) {
+        return Number(b.days) - Number(a.days);
+      }
+    });
+    // this.service
+    //   .listAll(this.authentication.currentUserValue.business, this.status)
+    //   .pipe(
+    //     tap(element => console.log("elemento", element)),
+    //     catchError((error: any) => {
+    //       this.handleError();
+    //       // this.error$.next(true);
+    //       return EMPTY;
+    //     })
+    //   )
+    //   .subscribe(data => {
+    //     this.data$.data = data;
+    //   });
   }
 
   handleError() {
@@ -163,16 +179,16 @@ export class MatTableComponent implements OnInit {
     let data = sale || this.selection.selected;
     console.log(data);
     console.log("onChangeStatus", sale);
-    this.service.completedSale(data).subscribe(
-      // tslint:disable-next-line:no-console
-      () => {
-        this.alertModal.showAlertSucess(
-          "Order alterada para Recebida com sucesso"
-        );
-        this.listAll();
-      },
-      err => console.error("Erro ao cadastrar loja ", err)
-    );
+    // this.service.completedSale(data).subscribe(
+    //   // tslint:disable-next-line:no-console
+    //   () => {
+    //     this.alertModal.showAlertSucess(
+    //       "Order alterada para Recebida com sucesso"
+    //     );
+    //     this.listAll();
+    //   },
+    //   err => console.error("Erro ao cadastrar loja ", err)
+    // );
   }
 
   onUpdateAll() {
@@ -193,14 +209,14 @@ export class MatTableComponent implements OnInit {
   }
 
   onChangeStatusOrder(data: any): void {
-    this.service.orderConfirmed(data).subscribe(
-      () => {
-        this.alertModal.showAlertSucess(
-          "Order alterada para Recebida com sucesso"
-        );
-        this.listAll();
-      },
-      err => console.error("Erro ao cadastrar loja ", err)
-    );
+    // this.service.orderConfirmed(data).subscribe(
+    //   () => {
+    //     this.alertModal.showAlertSucess(
+    //       "Order alterada para Recebida com sucesso"
+    //     );
+    //     this.listAll();
+    //   },
+    //   err => console.error("Erro ao cadastrar loja ", err)
+    // );
   }
 }

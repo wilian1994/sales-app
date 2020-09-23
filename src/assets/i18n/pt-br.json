@@ -1,23 +1,24 @@
 {
-    "category": {
-        "name": "Categorias"
-    },
-    "order": {
-        "name": "Nome",
-        "store": "Loja",
-        "tracking": "Rastreio",
-        "value": "Valor",
-        "purchaseDate": "Data da Compra",
-        "quantity": "Quantidade"
-    },
-    "default": {
-        "add": "Adicionar",
-        "search": "Pesquisar",
-        "action": "Ações",
-        "name": "Nome",
-        "store": "Loja",
-        "saleDay": "Dias Venda",
-        "value": "Valor",
-        "suggestedValue": "Valor Sugerido"
-    }
+  "category": {
+    "name": "Categorias"
+  },
+  "order": {
+    "name": "Nome",
+    "store": "Loja",
+    "tracking": "Rastreio",
+    "value": "Valor",
+    "purchaseDate": "Data da Compra",
+    "quantity": "Quantidade"
+  },
+  "default": {
+    "add": "Adicionar",
+    "search": "Pesquisar",
+    "action": "Ações",
+    "name": "Nome",
+    "store": "Loja",
+    "saleDay": "Dias Venda",
+    "days": "Dias",
+    "value": "Valor",
+    "suggestedValue": "Valor Sugerido"
+  }
 }
